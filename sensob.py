@@ -1,11 +1,10 @@
 """ modoule for sensob class """
 from irproximity_sensor import IRProximitySensor
-from camera import Camera
+# from irproximity_sensor import *
 from ultrasonic import Ultrasonic
-from reflectance_sensors import ReflectanceSensor
-from zumo_button import ZumoButton
-from irproximity import *
-from camera import *
+from reflectance_sensors import ReflectanceSensors
+from camera import Camera
+# from camera import *
 from imager2 import Imager
 from PIL import Image
 
@@ -25,9 +24,8 @@ class Sensob:
         """ fetch relevant sensor value(s) and convert them
             into the pre-processed sensob value. Only do this
             once each timestep, even if several behaviours
-            share the same sensob. """
-        # get timestep from bbcon
-        """ for each sensor in self.sensors, append the
+            share the same sensob.
+            For each sensor in self.sensors, append the
             updated raw data to an array 'sensor_data'.
             Then run 'process_sensor_data' with the array
             as an argument.
@@ -36,18 +34,18 @@ class Sensob:
         for sensor in self.sensors:
             sensor_data.append(sensor.update())
         self.process_sensor_data(sensor_data)
+        print("self.value: ", self.value)
         return self.value
 
-    def process_sensor_data(self, sensor_data=[]):
+    def process_sensor_data(self, sensor_data):
         """ every instance has its own way of processing
             the raw data. 'sensor_data' is an array of
             arguments."""
-        pass
 
 
 class Proximity(Sensob):
     """ Proximity is an instance of Sensob which
-        determines what the distance to the nearesst
+        determines what the distance to the nearest
         object is. Both the IRProximitySensor and the
         Ultrasonic sensor is used. The IR looks for a
         line, and the US looks for objects. """
@@ -55,9 +53,9 @@ class Proximity(Sensob):
     def __init__(self):
         """ Initialize IR and US sensors and add them
             as sensors in a Sensob as well. """
-        ir = IRProximitySensor()
-        us = Ultrasonic()
-        super().__init__(sensors=[ir, us])
+        ir_ = IRProximitySensor()
+        us_ = Ultrasonic()
+        super().__init__(sensors=[ir_, us_])
 
     def process_sensor_data(self, sensor_data):
         """ processes the data from both IR and US
@@ -87,8 +85,8 @@ class LineDetector(Sensob):
 
     def __init__(self):
         """ initialize IRProximitySensor """
-        ir = IRProximitySensor()
-        super(LineDetector, self).__init__(sensors=[ir])
+        ir_ = IRProximitySensor()
+        super(LineDetector, self).__init__(sensors=[ir_])
 
     def process_sensor_data(self, sensor_data):
         """ process the data from the IR sensor. """
@@ -102,8 +100,8 @@ class MeasureDistance(Sensob):
 
     def __init__(self):
         """ initialize """
-        self.us = Ultrasonic()
-        super().__init__(sensorts=[self.us])
+        self.us_ = Ultrasonic()
+        super().__init__(sensorts=[self.us_])
 
     def process_sensor_data(self, sensor_data):
         """ sets the value to sensor_data[0] """
