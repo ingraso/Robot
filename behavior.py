@@ -72,7 +72,6 @@ class Behavior:
 
         # Calculate new value for match_degree
 
-        pass
 
 
 class Behavior1(Behavior):
@@ -95,7 +94,7 @@ class Behavior1(Behavior):
     def sense_and_act(self):
         # checks if the ir-sensor sensob har detected a line
 
-        if self.ir_sensob.value is None:
+        if sum(self.ir_sensob.value) / len(self.ir_sensob.value) > 0.9:
 
             # match degree is low since no line is detected
             # ok to set to 0? Then this will never be chosen, and we don't have
@@ -112,29 +111,35 @@ class Behavior1(Behavior):
             self.motor_recommendations = ['left', 0, +0, ]
 
             return
-        else:
+
 
             # if a line is detected we should really try to avoid it, so match
-            # degree is superhigh
-            self.match_degree = 1  # is 1 to high, or ok?
+        # degree is superhigh
+        self.match_degree = 1  # is 1 to high, or ok?
 
-            # find which side of the robot the line is detected
-            start, end, = self.ir_sensob.value
-            average = (start + end) / 2
+        # find which side of the robot the line is detected
 
-            if average < 2:  # line is on left side
-                # turn rigth
-                degrees = random.randint(45, 100)
-                self.motor_recommendations = ['right', degrees, +0.4, ]
-            elif average > 4:  # line is on right side
-                # turn left
-                degrees = random.randint(45, 100)
-                self.motor_recommendations = ['right', degrees, +0.4, ]
-            else:   # line is straight in front
-                # turn a lot
-                degrees = random.randint(100, 200)
-                self.motor_recommendations = ['right', degrees, +0.4, ]
-            return
+
+        product_values = []
+
+        for value_index in range(len(self.ir_sensob.value)):
+            product_values.append(self.ir_sensob.value[value_index] * (value_index + 1))
+
+        average = sum(product_values) / sum(self.ir_sensob.value) - 1
+
+        if average < 2:  # line is on left side
+            # turn rigth
+            degrees = random.randint(45, 100)
+            self.motor_recommendations = ['right', degrees, +0.4, ]
+        elif average > 4:  # line is on right side
+            # turn left
+            degrees = random.randint(45, 100)
+            self.motor_recommendations = ['right', degrees, +0.4, ]
+        else:  # line is straight in front
+            # turn a lot
+            degrees = random.randint(100, 200)
+            self.motor_recommendations = ['right', degrees, +0.4, ]
+        return
 
 
 class Behavior2(Behavior):
@@ -143,7 +148,7 @@ class Behavior2(Behavior):
     def __init__(self, measure_distance, bbcon):
         """Initializes behaviour2"""
         sensobs = [measure_distance]
-        Behavior.__init__(bbcon, sensobs)
+        Behavior.__init__(self, bbcon, sensobs)
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("left")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
@@ -171,6 +176,7 @@ class Behavior2(Behavior):
                 # If we are closer than 10 cm we should use the camera
                 self.match_degree = 0
 
+
 class Behavior3(Behavior):
     """This behavior will check if the object is pushed outside of the tape"""
 
@@ -185,20 +191,21 @@ class Behavior3(Behavior):
 
     def consider_activation(self):
         """We should activate the behavior if the object is pushed out of line"""
-        if self.sensobs[0].value < 5 and self.sensobs[1].value >= 0.5 and self.sensobs[2].value is not None:
+        if self.sensobs[0].value < 5 and self.sensobs[1].value >= 0.5 \
+                and (sum(self.sensobs[2].value) / len(self.sensobs[2].value) <= 0.9):
             return True
         return False
 
     def consider_deactivation(self):
         """Should usually be deactivated"""
-        if self.sensobs[0].value >= 5 and self.sensobs[1].value >= 0.5 and self.sensobs[2].value is None:
+        if self.sensobs[0].value >= 5 and self.sensobs[1].value >= 0.5 \
+                and (sum(self.sensobs[2].value) / len(self.sensobs[2].value) > 0.9):
             return True
         return False
 
     def sense_and_act(self):
         self.match_degree = 1
         self.halt_request = True
-
 
 
 class Behavior4(Behavior):
@@ -210,7 +217,7 @@ class Behavior4(Behavior):
         object it is driving towards"""
         self.sensobs = [measure_distance, camera_ob]
         self.bbcon = bbcon
-        Behavior.__init__(self)
+        Behavior.__init__(self, bbcon, self.sensobs)
         self.priority = 0.7  # This behaviour is sort of important
         self.motor_recommendations.append("left")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
@@ -234,6 +241,7 @@ class Behavior4(Behavior):
         # We can't come here unless the requirements are met, so this
         # should work.
 
+
 class Behavior5(Behavior):
     """Behavior that avoids objects that are not red."""
     red_camera_sensob: object
@@ -243,21 +251,21 @@ class Behavior5(Behavior):
         self.priority = 0.7
         self.measure_distance_sensob = measure_distance_sensob
         self.red_camera_sensob = red_camera_sensob
-        super(Behavior1, self).__init__(
-            bbcon, [
-                measure_distance_sensob, red_camera_sensob])
+        super(Behavior5, self).__init__(self, bbcon, [measure_distance_sensob, red_camera_sensob])
 
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
         # (here 5cm)
-        if self.measure_distance_sensob.value < 5 and self.red_camera_sensob.value < 0.5:  # should we check for None?
+        if self.measure_distance_sensob.value < 5 and \
+                self.red_camera_sensob.value < 0.5:  # should we check for None?
             return True
         return False
 
     def consider_deactivation(self):
         # Should be deactivated if it is not close to an object (checks for
         # more than 5 cm) or wrong color
-        if self.measure_distance_sensob.value >= 10 or self.red_camera_sensob.value >= 0.5:  # should we check for None?
+        if self.measure_distance_sensob.value >= 10 or \
+                self.red_camera_sensob.value >= 0.5:  # should we check for None?
             return True
         return False
 
@@ -271,13 +279,14 @@ class Behavior5(Behavior):
 
 
 class Behavior6(Behavior):
-    """Behavor that keeps track of total time and declares that a run has exceeded its time limit."""
+    """Behavor that keeps track of total time and declares that a
+    run has exceeded its time limit."""
 
     # do we have a time-sensob?/Can we make one?
     def __init__(self, time_sensob, bbcon, time_limit=float("inf")):
         self.time_sensob = time_sensob
         self.time_limit = time_limit
-        super(Behavior1, self).__init__(bbcon, [time_sensob])
+        super(Behavior6, self).__init__(bbcon, [time_sensob])
 
     def consider_activation(self):
         # Should be active if time limit has been exceeded
@@ -298,4 +307,4 @@ class Behavior6(Behavior):
 
         # the motors doesn't really have to do anything. Remove?
         self.motor_recommendations = [
-            (0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
+            'left', 0, 0]  # I really don't know'
