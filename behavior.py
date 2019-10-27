@@ -80,7 +80,7 @@ class Behavior1(Behavior):
     def __init__(self, ir_sensob, bbcon):
         self.ir_sensob = ir_sensob
         self.priority = 1
-        super(Behavior1, self).__init__(bbcon, [ir_sensob])
+        super(Behavior1, self).__init__(self, bbcon, [ir_sensob])
 
     def consider_activation(self):
         # Should always be active to make sure that the robot does not drive
@@ -147,8 +147,8 @@ class Behavior2(Behavior):
 
     def __init__(self, measure_distance, bbcon):
         """Initializes behaviour2"""
-        sensobs = [measure_distance]
-        Behavior.__init__(self, bbcon, sensobs)
+        self.sensobs = [measure_distance]
+        super().__init__(self, bbcon, self.sensobs)
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("l")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
@@ -185,7 +185,7 @@ class Behavior3(Behavior):
         and the color of the object"""
         self.sensobs = [measure_distance, camera_ob, line_detector]
         self.bbcon = bbcon
-        super().__init__(self)
+        super().__init__(self, bbcon, self.sensobs)
         # This object should have high priority, because we have to stop:
         self.priority = 1
 
@@ -285,7 +285,7 @@ class Behavior6(Behavior):
     # do we have a time-sensob?/Can we make one?
     def __init__(self, bbcon, time_limit=120):
         self.time_limit = time_limit
-        super(Behavior6, self).__init__(bbcon, [])
+        super(Behavior6, self).__init__(self, bbcon, [])
 
     def consider_activation(self):
         # Should be active if time limit has been exceeded
