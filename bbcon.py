@@ -4,9 +4,10 @@ import arbitrator
 import behavior
 import motob
 import sensob
-import sys
-sys.path.append('../')
-import project6_supply.zumo_button
+import zumo_button
+#import sys
+#sys.path.append('../')
+#import project6_supply.zumo_button
 
 
 class Bbcon:
