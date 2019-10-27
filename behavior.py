@@ -217,7 +217,7 @@ class Behavior4(Behavior):
         object it is driving towards"""
         self.sensobs = [measure_distance, camera_ob]
         self.bbcon = bbcon
-        Behavior.__init__(bbcon, self.sensobs)
+        super().__init__(bbcon, self.sensobs)
         self.priority = 0.7  # This behaviour is sort of important
         self.motor_recommendations.append("l")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
