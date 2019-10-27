@@ -85,8 +85,8 @@ class LineDetector(Sensob):
 
     def __init__(self):
         """ initialize IRProximitySensor """
-        ir_ = IRProximitySensor()
-        super(LineDetector, self).__init__(sensors=[ir_])
+        rs_ = ReflectanceSensors()
+        super(LineDetector, self).__init__(sensors=[rs_])
 
     def process_sensor_data(self, sensor_data):
         """ process the data from the IR sensor. """
@@ -101,7 +101,7 @@ class MeasureDistance(Sensob):
     def __init__(self):
         """ initialize """
         self.us_ = Ultrasonic()
-        super().__init__(sensorts=[self.us_])
+        super().__init__(sensors=[self.us_])
 
     def process_sensor_data(self, sensor_data):
         """ sets the value to sensor_data[0] """
