@@ -135,7 +135,7 @@ class Behavior1(Behavior):
             return
 
 
-class Behavior2(Behavior):
+class Behavior5(Behavior):
     """Behavior that avoids red objects."""
 
     def __init__(self, measure_distance_sensob, red_camera_sensob,
