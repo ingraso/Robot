@@ -148,7 +148,9 @@ class Behavior2(Behavior):
     def __init__(self, measure_distance, bbcon):
         """Initializes behaviour2"""
         self.sensobs = [measure_distance]
-        super().__init__(self, bbcon, self.sensobs)
+        
+        super().__init__(bbcon, self.sensobs)
+
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("l")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
@@ -185,7 +187,9 @@ class Behavior3(Behavior):
         and the color of the object"""
         self.sensobs = [measure_distance, camera_ob, line_detector]
         self.bbcon = bbcon
-        super().__init__(self, bbcon, self.sensobs)
+        
+        super().__init__(bbcon, self.sensobs)
+  
         # This object should have high priority, because we have to stop:
         self.priority = 1
 
@@ -217,7 +221,7 @@ class Behavior4(Behavior):
         object it is driving towards"""
         self.sensobs = [measure_distance, camera_ob]
         self.bbcon = bbcon
-        Behavior.__init__(self, bbcon, self.sensobs)
+        Behavior.__init__(bbcon, self.sensobs)
         self.priority = 0.7  # This behaviour is sort of important
         self.motor_recommendations.append("l")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
@@ -251,7 +255,7 @@ class Behavior5(Behavior):
         self.priority = 0.7
         self.measure_distance_sensob = measure_distance_sensob
         self.red_camera_sensob = red_camera_sensob
-        super(Behavior5, self).__init__(self, bbcon, [measure_distance_sensob, red_camera_sensob])
+        super(Behavior5, self).__init__(bbcon, [measure_distance_sensob, red_camera_sensob])
 
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
