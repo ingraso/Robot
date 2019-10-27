@@ -1,4 +1,5 @@
 """Module for the behavior class."""
+import random
 
 
 class Behavior:
@@ -79,6 +80,7 @@ class Behavior1(Behavior):
 
     def __init__(self, ir_sensob, bbcon):
         self.ir_sensob = ir_sensob
+        self.priority = 1
         super(Behavior1, self).__init__(bbcon, [ir_sensob])
 
     def consider_activation(self):
@@ -107,7 +109,7 @@ class Behavior1(Behavior):
             # Can be changed later
             # dont' think this is the right way to recommend, but we will fix
             # (I hope;))
-            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]
+            self.motor_recommendations = ['left', 0, +0, ]
 
             return
         else:
@@ -116,67 +118,66 @@ class Behavior1(Behavior):
             # degree is superhigh
             self.match_degree = 1  # is 1 to high, or ok?
 
-            side = None  # variable to store which side the line is on
-
             # find which side of the robot the line is detected
             start, end, = self.ir_sensob.value
             average = (start + end) / 2
 
-            if average < 3:  # line is on left side
-                # reverse then turn rigth
-                # don't know how to say this to the motors
-                # TODO
-                pass
-            else:
-                # reverse then turn left
-                # don't know how to say this to the motors
-                # TODO
-                pass
+            if average < 2:  # line is on left side
+                # turn rigth
+                degrees = random.randint(45, 100)
+                self.motor_recommendations = ['right', degrees, +0.4, ]
+            elif average > 4:  # line is on right side
+                # turn left
+                degrees = random.randint(45, 100)
+                self.motor_recommendations = ['right', degrees, +0.4, ]
+            else:   # line is straight in front
+                # turn a lot
+                degrees = random.randint(100, 200)
+                self.motor_recommendations = ['right', degrees, +0.4, ]
             return
 
 
 class Behavior5(Behavior):
-    """Behavior that avoids red objects."""
+    """Behavior that avoids objects that are not red."""
+    red_camera_sensob: object
 
     def __init__(self, measure_distance_sensob, red_camera_sensob,
                  bbcon):  # hope we have a sensob that checks for red colors;))
+        self.priority = 0.7
         self.measure_distance_sensob = measure_distance_sensob
         self.red_camera_sensob = red_camera_sensob
-        super(Behavior1, self).__init__(bbcon, [measure_distance_sensob, red_camera_sensob])
+        super(Behavior1, self).__init__(
+            bbcon, [
+                measure_distance_sensob, red_camera_sensob])
 
     def consider_activation(self):
-        # Should only be activated if it is closer than a certain distance (here 5cm)
-        if self.measure_distance_sensob.value < 5:  # should we check for None?
+        # Should only be activated if it is closer than a certain distance
+        # (here 5cm)
+        if self.measure_distance_sensob.value < 5 and self.red_camera_sensob.value < 0.5:  # should we check for None?
             return True
         return False
 
     def consider_deactivation(self):
-        # Should be deactivated if it is not close to an object (checks for more than 5 cm)
-        if self.measure_distance_sensob.value >= 5:  # should we check for None?
+        # Should be deactivated if it is not close to an object (checks for
+        # more than 5 cm) or wrong color
+        if self.measure_distance_sensob.value >= 10 or self.red_camera_sensob.value >= 0.5:  # should we check for None?
             return True
         return False
 
     def sense_and_act(self):
-        # Assuming that camerasensob returns a float of the proportion of red in the picture
-        if self.red_camera_sensob.value > 0.3:  # I just made up this number as a lower bound,we can change it:)
-            # A red object has probably been detected
-            self.match_degree = 1  # too high? (Set it high since it is kinda important to avoid red)'
+        # A red object has probably been detected
+        # too high? (Set it high since it is kinda important to avoid red)'
+        self.match_degree = 0.9
 
-            # reverse then turn rigth
-            # don't know how to say this to the motors :S
-            # TODO
-            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # THIS IS WRONG
-        else:
-            self.match_degree = 0  # Too low? (Set it this low because the robot shouldn't do anything anyway)
-
-            # nothing to avoid, so the motors doesn't really have to do anything
-            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
+        # turn left
+        self.motor_recommendations = ['left', random.randint(45, 100), +0.4]
 
 
 class Behavior6(Behavior):
-    """Behavor that keeps track of total time and declares that a run has exeeded its time limit."""
+    """Behavor that keeps track of total time and declares that a run has exceeded its time limit."""
 
-    def __init__(self, time_sensob, bbcon, time_limit=float("inf")):  # do we have a time-sensob?/Can we make one?
+    # do we have a time-sensob?/Can we make one?
+    def __init__(self, time_sensob, bbcon, time_limit=float("inf")):
         self.time_sensob = time_sensob
         self.time_limit = time_limit
         super(Behavior1, self).__init__(bbcon, [time_sensob])
@@ -194,18 +195,10 @@ class Behavior6(Behavior):
         return False
 
     def sense_and_act(self):
-        if self.time_sensob.value >= self.time_limit:
-            # should stop, so high mathc degree
-            self.match_degree = 1  # too high?
 
-            # Request robot to end the run
-            self.halt_request = True
+        # Request robot to end the run
+        self.halt_request = True
 
-            # the motors doesn't really have to do anything. Remove?
-            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
-        else:  # Necessary? Robot shouldn't be active anyway
-            # Time hasn't run out, no need to do anything
-            self.match_degree = 0  # very low match
-
-            # the motors doesn't really have to do anything. Remove?
-            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
+        # the motors doesn't really have to do anything. Remove?
+        self.motor_recommendations = [
+            (0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
