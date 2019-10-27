@@ -1,14 +1,13 @@
 """ modoule for sensob class """
-import sys
-sys.path.append('../')
-
-from project6_supply.irproximity_sensor import IRProximitySensor
+# import sys
+# sys.path.append('../')
+from irproximity_sensor import IRProximitySensor
 # from irproximity_sensor import *
-from project6_supply.ultrasonic import Ultrasonic
-from project6_supply.reflectance_sensors import ReflectanceSensors
-from project6_supply.camera import Camera
+from ultrasonic import Ultrasonic
+from reflectance_sensors import ReflectanceSensors
+from camera import Camera
 # from camera import *
-from project6_supply.imager2 import Imager
+from imager2 import Imager
 from PIL import Image
 
 
