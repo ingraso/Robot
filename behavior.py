@@ -109,11 +109,6 @@ class Behavior1(Behavior):
             # (I hope;))
             self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]
 
-            # match degree is low since no line is detected
-            # ok to set to 0? Then this will never be chosen, and we don't have
-            # to set motors:)
-            self.match_degree = 0
-
             return
         else:
 
@@ -138,3 +133,41 @@ class Behavior1(Behavior):
                 # TODO
                 pass
             return
+
+
+class Behavior2(Behavior):
+    """Behavior that avoids red objects."""
+
+    def __init__(self, measure_distance_sensob, red_camera_sensob,
+                 bbcon):  # hope we have a sensob that checks for red colors;))
+        self.measure_distance_sensob = measure_distance_sensob
+        self.red_camera_sensob = red_camera_sensob
+        super(Behavior1, self).__init__(bbcon, [measure_distance_sensob, red_camera_sensob])
+
+    def consider_activation(self):
+        # Should only be activated if it is closer than a certain distance (here 5cm)
+        if self.measure_distance_sensob.value < 5:  # should we check for None?
+            return True
+        return False
+
+    def consider_deactivation(self):
+        # Should be deactivated if it is not close to an object (checks for more than 5 cm)
+        if self.measure_distance_sensob.value >= 5:  # should we check for None?
+            return True
+        return False
+
+    def sense_and_act(self):
+        # Assuming that camerasensob returns a float of the proportion of red in the picture
+        if self.red_camera_sensob.value > 0.3:  # I just made up this number as a lower bound,we can change it:)
+            # A red object has probably been detected
+            self.match_degree = 1  # too high? (Set it high since it is kinda important to avoid red)'
+
+            # reverse then turn rigth
+            # don't know how to say this to the motors :S
+            # TODO
+            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # THIS IS WRONG
+        else:
+            self.match_degree = 0  # Too low? (Set it this low because the robot shouldn't do anything anyway)
+
+            # nothing to avoid, so the motors doesn't really have to do anything
+            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
