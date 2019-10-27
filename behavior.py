@@ -108,7 +108,7 @@ class Behavior1(Behavior):
             # Can be changed later
             # dont' think this is the right way to recommend, but we will fix
             # (I hope;))
-            self.motor_recommendations = ['left', 0, +0, ]
+            self.motor_recommendations = ['l', 0, +0, ]
 
             return
 
@@ -130,15 +130,15 @@ class Behavior1(Behavior):
         if average < 2:  # line is on left side
             # turn rigth
             degrees = random.randint(45, 100)
-            self.motor_recommendations = ['right', degrees, +0.4, ]
+            self.motor_recommendations = ['r', degrees, +0.4, ]
         elif average > 4:  # line is on right side
             # turn left
             degrees = random.randint(45, 100)
-            self.motor_recommendations = ['right', degrees, +0.4, ]
+            self.motor_recommendations = ['r', degrees, +0.4, ]
         else:  # line is straight in front
             # turn a lot
             degrees = random.randint(100, 200)
-            self.motor_recommendations = ['right', degrees, +0.4, ]
+            self.motor_recommendations = ['r', degrees, +0.4, ]
         return
 
 
@@ -150,7 +150,7 @@ class Behavior2(Behavior):
         sensobs = [measure_distance]
         Behavior.__init__(self, bbcon, sensobs)
         self.priority = 0.3  # This behaviour isn't very important.
-        self.motor_recommendations.append("left")  # Which direction the robot should turn
+        self.motor_recommendations.append("l")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
         self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
 
@@ -219,7 +219,7 @@ class Behavior4(Behavior):
         self.bbcon = bbcon
         Behavior.__init__(self, bbcon, self.sensobs)
         self.priority = 0.7  # This behaviour is sort of important
-        self.motor_recommendations.append("left")  # Which direction the robot should turn
+        self.motor_recommendations.append("l")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
         self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
 
@@ -275,7 +275,7 @@ class Behavior5(Behavior):
         self.match_degree = 0.9
 
         # turn left
-        self.motor_recommendations = ['left', random.randint(45, 100), +0.4]
+        self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
 
 
 class Behavior6(Behavior):
@@ -307,4 +307,4 @@ class Behavior6(Behavior):
 
         # the motors doesn't really have to do anything. Remove?
         self.motor_recommendations = [
-            'left', 0, 0]  # I really don't know'
+            'l', 0, 0]  # I really don't know'
