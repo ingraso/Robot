@@ -137,6 +137,103 @@ class Behavior1(Behavior):
             return
 
 
+class Behavior2(Behavior):
+    """Class for behavior that drive around searching for objects"""
+
+    def __init__(self, measure_distance, bbcon):
+        """Initializes behaviour2"""
+        sensobs = [measure_distance]
+        Behavior.__init__(bbcon, sensobs)
+        self.priority = 0.3  # This behaviour isn't very important.
+        self.motor_recommendations.append("left")  # Which direction the robot should turn
+        self.motor_recommendations.append(0)  # How many degrees the robot should turn
+        self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
+
+    def consider_deactivation(self):
+        """Method that checks if we should deactivate the behavior. This behaviour
+        should always be active. """
+        return False
+
+    def consider_activation(self):
+        """Method that checks if the behavior should be activated.
+        Should always be activated"""
+        return True
+
+    def sense_and_act(self):
+        """will update the match_degree. The motor_recommendations
+        are always the same for this behavior"""
+        for sensob in self.sensobs:
+            # The ultrasound-sensobs value represents the distance in cm (float)
+            if sensob.value > 10:
+                # Before we find the object, the match_degree should be high
+                self.match_degree = 0.6
+            else:
+                # If we are closer than 10 cm we should use the camera
+                self.match_degree = 0
+
+class Behavior3(Behavior):
+    """This behavior will check if the object is pushed outside of the tape"""
+
+    def __init__(self, measure_distance, camera_ob, line_detector, bbcon):
+        """This object should keep track of the line, distance to object,
+        and the color of the object"""
+        self.sensobs = [measure_distance, camera_ob, line_detector]
+        self.bbcon = bbcon
+        super().__init__(self)
+        # This object should have high priority, because we have to stop:
+        self.priority = 1
+
+    def consider_activation(self):
+        """We should activate the behavior if the object is pushed out of line"""
+        if self.sensobs[0].value < 5 and self.sensobs[1].value >= 0.5 and self.sensobs[2].value is not None:
+            return True
+        return False
+
+    def consider_deactivation(self):
+        """Should usually be deactivated"""
+        if self.sensobs[0].value >= 5 and self.sensobs[1].value >= 0.5 and self.sensobs[2].value is None:
+            return True
+        return False
+
+    def sense_and_act(self):
+        self.match_degree = 1
+        self.halt_request = True
+
+
+
+class Behavior4(Behavior):
+    """This class should drive towards objects that are red."""
+
+    def __init__(self, measure_distance, camera_ob, bbcon):
+        """Initializes the Behavior4 object. Must have a measure_distance object
+        to keep track of the distance, and a camera_ob to know the color of the
+        object it is driving towards"""
+        self.sensobs = [measure_distance, camera_ob]
+        self.bbcon = bbcon
+        Behavior.__init__(self)
+        self.priority = 0.7  # This behaviour is sort of important
+        self.motor_recommendations.append("left")  # Which direction the robot should turn
+        self.motor_recommendations.append(0)  # How many degrees the robot should turn
+        self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
+
+    def consider_activation(self):
+        """This method should be activated if we are within 15 cm of an object"""
+        if self.sensobs[0].value <= 10 and self.sensobs[1].value >= 0.5:
+            return True
+        return False
+
+    def consider_deactivation(self):
+        """Should be deactivated if we are further away than 15 cm"""
+        if self.sensobs[0].value > 10 or self.sensobs[1].value < 0.5:
+            return True
+        return False
+
+    def sense_and_act(self):
+        """Should update the match_degree and the motor_recommendations"""
+        self.match_degree = 0.9
+        # We can't come here unless the requirements are met, so this
+        # should work.
+
 class Behavior5(Behavior):
     """Behavior that avoids objects that are not red."""
     red_camera_sensob: object
