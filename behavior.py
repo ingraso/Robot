@@ -171,3 +171,41 @@ class Behavior2(Behavior):
 
             # nothing to avoid, so the motors doesn't really have to do anything
             self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
+
+
+class Behavior6(Behavior):
+    """Behavor that keeps track of total time and declares that a run has exeeded its time limit."""
+
+    def __init__(self, time_sensob, bbcon, time_limit=float("inf")):  # do we have a time-sensob?/Can we make one?
+        self.time_sensob = time_sensob
+        self.time_limit = time_limit
+        super(Behavior1, self).__init__(bbcon, [time_sensob])
+
+    def consider_activation(self):
+        # Should be active if time limit has been exceeded
+        if self.time_sensob.value >= self.time_limit:
+            return True
+        return False
+
+    def consider_deactivation(self):
+        # Should never be deactivated
+        if self.time_sensob.value < self.time_limit:
+            return True
+        return False
+
+    def sense_and_act(self):
+        if self.time_sensob.value >= self.time_limit:
+            # should stop, so high mathc degree
+            self.match_degree = 1  # too high?
+
+            # Request robot to end the run
+            self.halt_request = True
+
+            # the motors doesn't really have to do anything. Remove?
+            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
+        else:  # Necessary? Robot shouldn't be active anyway
+            # Time hasn't run out, no need to do anything
+            self.match_degree = 0  # very low match
+
+            # the motors doesn't really have to do anything. Remove?
+            self.motor_recommendations = [(0, 0, 'L'), (0, 0, 'R')]  # I really don't know'
