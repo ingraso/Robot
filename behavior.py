@@ -244,7 +244,7 @@ class Behavior4(Behavior):
 
 class Behavior5(Behavior):
     """Behavior that avoids objects that are not red."""
-    red_camera_sensob: object
+    red_camera_sensob = object
 
     def __init__(self, measure_distance_sensob, red_camera_sensob,
                  bbcon):  # hope we have a sensob that checks for red colors;))
