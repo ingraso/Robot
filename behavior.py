@@ -283,20 +283,19 @@ class Behavior6(Behavior):
     run has exceeded its time limit."""
 
     # do we have a time-sensob?/Can we make one?
-    def __init__(self, time_sensob, bbcon, time_limit=float("inf")):
-        self.time_sensob = time_sensob
+    def __init__(self, bbcon, time_limit=120):
         self.time_limit = time_limit
-        super(Behavior6, self).__init__(bbcon, [time_sensob])
+        super(Behavior6, self).__init__(bbcon, [])
 
     def consider_activation(self):
         # Should be active if time limit has been exceeded
-        if self.time_sensob.value >= self.time_limit:
+        if self.bbcon.total_time >= self.time_limit:
             return True
         return False
 
     def consider_deactivation(self):
         # Should never be deactivated
-        if self.time_sensob.value < self.time_limit:
+        if self.bbcon.total_time < self.time_limit:
             return True
         return False
 
@@ -306,5 +305,4 @@ class Behavior6(Behavior):
         self.halt_request = True
 
         # the motors doesn't really have to do anything. Remove?
-        self.motor_recommendations = [
-            'l', 0, 0]  # I really don't know'
+        self.motor_recommendations = ['l', 0, 0]  # I really don't know'
