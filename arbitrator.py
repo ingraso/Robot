@@ -15,13 +15,13 @@ class Arbitrator:
     def choose_action(self):
         """This method will decide which action should be activated, and return
         the tuple """
-        active_behaviours = self.bbcon.active_behaviours
-        print(active_behaviours)
+        active_behaviors = self.bbcon.active_behaviors
+        print(active_behaviors)
         interval = []
         current_num = 0
-        for behaviour in active_behaviours:
+        for behavior in active_behaviors:
             # Creates a list containing all the intervals for the behaviours
-            current_num += behaviour.weight
+            current_num += behavior.weight
             interval.append(round(current_num, 2))
         print(interval)
         # Choose a random num in the full interval:
@@ -30,7 +30,7 @@ class Arbitrator:
         for i in range(0, len(interval)):
             if random_number < interval[i]:
                 # Find correct behaviour and end the for-loop
-                correct_behaviour = active_behaviours[i]
+                correct_behavior = active_behaviors[i]
                 break
-        tupple = (correct_behaviour.motor_recommendations, correct_behaviour.halt_request)
+        tupple = (correct_behavior.motor_recommendations, correct_behavior.halt_request)
         return tupple
