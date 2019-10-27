@@ -1,7 +1,7 @@
 """BBCON control module"""
 import time
 import arbitrator
-import behaviour
+import behavior
 import motob
 import sensob
 import sys
