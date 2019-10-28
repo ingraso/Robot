@@ -47,7 +47,8 @@ class Bbcon:
     def run_one_timestep(self):
         """Kjøre en runde med viss timestap"""
         for sens in self.sensobs_objects:
-            # oppdaterer alle sensobs
+            print("Sensob :" + str(sens) + " har self.value: " + sens.get_value())
+	    # oppdaterer alle sensobs
             sens.update()
             print("Sensob :" + str(sens) + "har blitt oppdatert")
 
