@@ -108,7 +108,7 @@ class MeasureDistance(Sensob):
     def __init__(self):
         """ initialize """
         self.us_ = Ultrasonic()
-        super(Ultrasonic, self).__init__(sensors=[self.us_])
+        super(MeasureDistance, self).__init__(sensors=[self.us_])
 
     def process_sensor_data(self, sensor_data):
         """ sets the value to sensor_data[0] """
@@ -131,7 +131,7 @@ class Cameraob(Sensob):
         self.min = (256, 40, 0)
         self.max = (50, 0, 0)
 
-        super(Camera, self).__init__(sensors=[cam])
+        super(Cameraob, self).__init__(sensors=[cam])
 
     def process_sensor_data(self, sensor_data):
         """ process the data from the camera sensor. """
