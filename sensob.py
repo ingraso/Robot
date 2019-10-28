@@ -44,6 +44,10 @@ class Sensob:
             the raw data. 'sensor_data' is an array of
             arguments."""
 
+    def get_value(self):
+        """ returns self.value """
+        return self.value
+
 
 class Proximity(Sensob):
     """ Proximity is an instance of Sensob which
