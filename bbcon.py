@@ -87,11 +87,11 @@ def main():
 		BBCON.add_sensor(sensob.LineDetector())  # legg til alle senobs
 		BBCON.add_sensor(sensob.MeasureDistance())  # legg til alle senobs
 		BBCON.add_sensor(sensob.Cameraob())  # legg til alle senobs
-		BBCON.add_behavior(behavior.Behavior1(BBCON.sensob_objects[0], BBCON))  # legg til alle behaviours
-		BBCON.add_behavior(behavior.Behavior2(BBCON.sensob_objects[1], BBCON))
-		BBCON.add_behavior(behavior.Behavior3(BBCON.sensob_objects[1], BBCON.sensob_objects[2], BBCON.sensob_objects[0], BBCON))
-		BBCON.add_behavior(behavior.Behavior4(BBCON.sensob_objects[1], BBCON.sensob_objects[2], BBCON))
-		BBCON.add_behavior(behavior.Behavior5(BBCON.sensob_objects[1], BBCON.sensob_objects[2], BBCON))
+		BBCON.add_behavior(behavior.Behavior1(BBCON.sensobs_objects[0], BBCON))  # legg til alle behaviours
+		BBCON.add_behavior(behavior.Behavior2(BBCON.sensobs_objects[1], BBCON))
+		BBCON.add_behavior(behavior.Behavior3(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON.sensobs_objects[0], BBCON))
+		BBCON.add_behavior(behavior.Behavior4(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
+		BBCON.add_behavior(behavior.Behavior5(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior6(BBCON))
 		TOTAL_STEPS = 0
 		BUTTON_BUTTON = True
