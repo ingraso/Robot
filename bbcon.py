@@ -23,7 +23,7 @@ class Bbcon:
     def __init__(self, motobs_objects):
         """Initierer en instans av BBCON"""
         self.arbitrator = arbitrator.Arbitrator(self)  # Arbitrator skal ta imot selve Bbcon()
-        self.motobs_objects = motobs_objects  # alle motobs objecter som snakker med hjulene
+        self.motobs_objects.append(motobs_objects)  # alle motobs objecter som snakker med hjulene
 
     def add_behavior(self, behavior):
         """Funksjon for å legge ny behaviours til behaviour_objects list"""
