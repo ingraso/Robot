@@ -94,7 +94,7 @@ class Behavior1(Behavior):
     def sense_and_act(self):
         # checks if the ir-sensor sensob har detected a line
 
-        if sum(self.ir_sensob.value) / len(self.ir_sensob.value) > 0.9:
+        if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.9:
 
             # match degree is low since no line is detected
             # ok to set to 0? Then this will never be chosen, and we don't have
@@ -122,10 +122,10 @@ class Behavior1(Behavior):
 
         product_values = []
 
-        for value_index in range(len(self.ir_sensob.value)):
-            product_values.append(self.ir_sensob.value[value_index] * (value_index + 1))
+        for value_index in range(len(self.ir_sensob.get_value)):
+            product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
 
-        average = sum(product_values) / sum(self.ir_sensob.value) - 1
+        average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
 
         if average < 2:  # line is on left side
             # turn rigth
@@ -169,7 +169,7 @@ class Behavior2(Behavior):
         are always the same for this behavior"""
         for sensob in self.sensobs:
             # The ultrasound-sensobs value represents the distance in cm (float)
-            if sensob.value > 10:
+            if sensob.get_value() > 10:
                 # Before we find the object, the match_degree should be high
                 self.match_degree = 0.6
             else:
@@ -191,15 +191,15 @@ class Behavior3(Behavior):
 
     def consider_activation(self):
         """We should activate the behavior if the object is pushed out of line"""
-        if self.sensobs[0].value < 5 and self.sensobs[1].value >= 0.5 \
-                and (sum(self.sensobs[2].value) / len(self.sensobs[2].value) <= 0.9):
+        if self.sensobs[0].get_value() < 5 and self.sensobs[1].get_value() >= 0.5 \
+                and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) <= 0.9):
             return True
         return False
 
     def consider_deactivation(self):
         """Should usually be deactivated"""
-        if self.sensobs[0].value >= 5 and self.sensobs[1].value >= 0.5 \
-                and (sum(self.sensobs[2].value) / len(self.sensobs[2].value) > 0.9):
+        if self.sensobs[0].get_value() >= 5 and self.sensobs[1].get_value() >= 0.5 \
+                and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) > 0.9):
             return True
         return False
 
@@ -225,13 +225,13 @@ class Behavior4(Behavior):
 
     def consider_activation(self):
         """This method should be activated if we are within 15 cm of an object"""
-        if self.sensobs[0].value <= 10 and self.sensobs[1].value >= 0.5:
+        if self.sensobs[0].get_value() <= 10 and self.sensobs[1].get_value() >= 0.5:
             return True
         return False
 
     def consider_deactivation(self):
         """Should be deactivated if we are further away than 15 cm"""
-        if self.sensobs[0].value > 10 or self.sensobs[1].value < 0.5:
+        if self.sensobs[0].get_value() > 10 or self.sensobs[1].get_value() < 0.5:
             return True
         return False
 
@@ -256,16 +256,16 @@ class Behavior5(Behavior):
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
         # (here 5cm)
-        if self.measure_distance_sensob.value < 5 and \
-                self.red_camera_sensob.value < 0.5:  # should we check for None?
+        if self.measure_distance_sensob.get_value() < 5 and \
+                self.red_camera_sensob.get_value() < 0.5:  # should we check for None?
             return True
         return False
 
     def consider_deactivation(self):
         # Should be deactivated if it is not close to an object (checks for
         # more than 5 cm) or wrong color
-        if self.measure_distance_sensob.value >= 10 or \
-                self.red_camera_sensob.value >= 0.5:  # should we check for None?
+        if self.measure_distance_sensob.get_value() >= 10 or \
+                self.red_camera_sensob.get_value() >= 0.5:  # should we check for None?
             return True
         return False
 
