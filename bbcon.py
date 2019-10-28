@@ -84,16 +84,15 @@ class Bbcon:
 def main():
 		print("*****Hello there, it's I, THE BBCON!!!*****")
 		BBCON = Bbcon(motob.motob())  # skrive inn motobs
-		BBCON.add_behavior(behavior.Behavior1(sensob.LineDetector(), BBCON))  # legg til alle behaviours
-		BBCON.add_behavior(behavior.Behavior2(sensob.MeasureDistance(), BBCON))
-		BBCON.add_behavior(behavior.Behavior3(sensob.MeasureDistance(), sensob.Cameraob(), sensob.LineDetector(), BBCON))
-		BBCON.add_behavior(behavior.Behavior4(sensob.MeasureDistance(), sensob.Cameraob(), BBCON))
-		BBCON.add_behavior(behavior.Behavior5(sensob.MeasureDistance(), sensob.Cameraob(), BBCON))
-		BBCON.add_behavior(behavior.Behavior6(BBCON))
-		#BBCON.add_sensor(sensob.Proximity())  # legg til alle senobs
 		BBCON.add_sensor(sensob.LineDetector())  # legg til alle senobs
 		BBCON.add_sensor(sensob.MeasureDistance())  # legg til alle senobs
 		BBCON.add_sensor(sensob.Cameraob())  # legg til alle senobs
+		BBCON.add_behavior(behavior.Behavior1(BBCON.sensob_objects[0], BBCON))  # legg til alle behaviours
+		BBCON.add_behavior(behavior.Behavior2(BBCON.sensob_objects[1], BBCON))
+		BBCON.add_behavior(behavior.Behavior3(BBCON.sensob_objects[1], BBCON.sensob_objects[2], BBCON.sensob_objects[0], BBCON))
+		BBCON.add_behavior(behavior.Behavior4(BBCON.sensob_objects[1], BBCON.sensob_objects[2], BBCON))
+		BBCON.add_behavior(behavior.Behavior5(BBCON.sensob_objects[1], BBCON.sensob_objects[2], BBCON))
+		BBCON.add_behavior(behavior.Behavior6(BBCON))
 		TOTAL_STEPS = 0
 		BUTTON_BUTTON = True
 		zumo_button.ZumoButton().wait_for_press()
