@@ -27,8 +27,11 @@ class Arbitrator:
         # Choose a random num in the full interval:
         random_number = random.uniform(0, interval[-1])
         print(random_number)
+        correct_behavior = None
         for i in range(0, len(interval)):
+            print("Nå er vi i for-løkken, runde: ", i)
             if random_number < interval[i]:
+                print("Nå er vi i if-steningen")
                 # Find correct behaviour and end the for-loop
                 correct_behavior = active_behaviors[i]
                 break
