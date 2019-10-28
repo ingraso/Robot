@@ -34,7 +34,8 @@ class Sensob:
             return - self.value"""
         sensor_data = []
         for sensor in self.sensors:
-            sensor_data.append(sensor.update())
+            sensor.update()
+            sensor_data.append(sensor.get_value())
         self.process_sensor_data(sensor_data)
         # print("self.value til" + self.sensors[0] + " er " + self.value)
         print(self.value)
