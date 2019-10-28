@@ -1,8 +1,9 @@
 """Motob class"""
-import sys
-sys.path.append('../')
-from project6_supply.motors import Motors
-#from project6_supply.zumo_button import ZumoButton
+# import sys
+# sys.path.append('../')
+# from project6_supply.motors import Motors
+# from project6_supply.zumo_button import ZumoButton
+import Motors
 
 
 
