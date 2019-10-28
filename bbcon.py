@@ -17,11 +17,11 @@ class Bbcon:
     behavior_objects = []  # alle behaviour_objects som finnes
     sensobs_objects = []  # alle sensobs objekter som robot har
     active_behaviors = []  # behaviours som LAGER anbefalinger basert på input fra sensobs
-    motobs_objects = []  ## alle motobs objecter som snakker med hjulene
     total_time = 0
 
     def __init__(self, motobs_objects):
         """Initierer en instans av BBCON"""
+	motobs_objects = []  ## alle motobs objecter som snakker med hjulene
         self.arbitrator = arbitrator.Arbitrator(self)  # Arbitrator skal ta imot selve Bbcon()
         self.motobs_objects.append(motobs_objects)  # alle motobs objecter som snakker med hjulene
 
