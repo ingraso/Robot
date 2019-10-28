@@ -124,7 +124,7 @@ class Behavior1(Behavior):
 
         product_values = []
 
-        for value_index in range(len(self.ir_sensob.get_value)):
+        for value_index in range(len(self.ir_sensob.get_value())):
             product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
 
         average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
