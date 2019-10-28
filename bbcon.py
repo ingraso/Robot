@@ -13,14 +13,13 @@ import zumo_button
 class Bbcon:
     """BBCON klass"""
 
-    time_step = 0.4  # må velge varighet på time_step for robot
-    behavior_objects = []  # alle behaviour_objects som finnes
-    sensobs_objects = []  # alle sensobs objekter som robot har
-    active_behaviors = []  # behaviours som LAGER anbefalinger basert på input fra sensobs
-    total_time = 0
-
     def __init__(self, motobs_objects):
         """Initierer en instans av BBCON"""
+        self.time_step = 0.4  # må velge varighet på time_step for robot
+        self.behavior_objects = []  # alle behaviour_objects som finnes
+        self.sensobs_objects = []  # alle sensobs objekter som robot har
+        self.active_behaviors = []  # behaviours som LAGER anbefalinger basert på input fra sensobs
+        self.total_time = 0
         motobs_objects = []  # alle motobs objecter som snakker med hjulene
         self.arbitrator = arbitrator.Arbitrator(self)  # Arbitrator skal ta imot selve Bbcon()
         self.motobs_objects.append(motobs_objects)  # alle motobs objecter som snakker med hjulene
@@ -48,7 +47,7 @@ class Bbcon:
         """Kjøre en runde med viss timestap"""
         for sens in self.sensobs_objects:
             # print("Sensoben har self.value: " + sens.get_value())
-	    # oppdaterer alle sensobs
+            # oppdaterer alle sensobs
             sens.update()
             print("Sensob :" + str(sens) + "har blitt oppdatert")
 
