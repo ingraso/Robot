@@ -20,7 +20,7 @@ class Bbcon:
         self.sensobs_objects = []  # alle sensobs objekter som robot har
         self.active_behaviors = []  # behaviours som LAGER anbefalinger basert på input fra sensobs
         self.total_time = 0
-        motobs_objects = []  # alle motobs objecter som snakker med hjulene
+        self.motobs_objects = []  # alle motobs objecter som snakker med hjulene
         self.arbitrator = arbitrator.Arbitrator(self)  # Arbitrator skal ta imot selve Bbcon()
         self.motobs_objects.append(motobs_objects)  # alle motobs objecter som snakker med hjulene
 
