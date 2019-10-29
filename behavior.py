@@ -244,7 +244,7 @@ class Behavior4(Behavior):
     def sense_and_act(self):
         """Should update the match_degree and the motor_recommendations"""
         self.match_degree = 0.9
-        self.motor_recommendations = ['l', 0, 0]
+        self.motor_recommendations = ['l', 0, 0.4]
         # We can't come here unless the requirements are met, so this
         # should work.
 
