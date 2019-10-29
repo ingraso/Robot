@@ -208,6 +208,7 @@ class Behavior3(Behavior):
     def sense_and_act(self):
         self.match_degree = 1
         self.halt_request = True
+        self.motor_recommendations = ['l', 0, 0]
 
 
 class Behavior4(Behavior):
