@@ -279,9 +279,9 @@ class Behavior5(Behavior):
 
         if self.red_camera_sensob.get_value() >= 0.5:
             # turn left
-            self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
-        else:
             self.motor_recommendations = ['f', 0, +0.4]
+        else:
+            self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
 
         # turn left
         #self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
