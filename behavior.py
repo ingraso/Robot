@@ -322,10 +322,11 @@ class Behavior5(Behavior):
         self.match_degree = 0.9
 
         if self.red_camera_sensob.get_value() >= 0.5:
-            # turn left
+            # keep going
             print("self.motor_recommendations = ", ['f', 0, +0.4])
             self.motor_recommendations = ['f', 0, +0.4]
         else:
+            # turn left
             print("self.motor_recommendations = ", ['l', random.randint(45, 100), +0.4])
             self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
 
