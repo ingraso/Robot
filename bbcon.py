@@ -46,38 +46,37 @@ class Bbcon:
     def run_one_timestep(self):
         """Kjøre en runde med viss timestap"""
         for sens in self.sensobs_objects:
-            # print("Sensoben har self.value: " + sens.get_value())
             # oppdaterer alle sensobs
             sens.update()
-            print("Sensob :" + str(sens) + "har blitt oppdatert")
+            # print("Sensob :" + str(sens) + "har blitt oppdatert")
 
         for behav in self.behavior_objects:
             # oppdaterer alle behaviour, s.a. de kan lese fra sensobs of sette
             # seg selv som aktive eller ikke
             behav.update()
-            print("Behavior_object :" + str(behav) + "har blitt oppdatert")
+            # print("Behavior_object :" + str(behav) + "har blitt oppdatert")
 
         for behav in self.behavior_objects:  # finner ut om behaviour er aktiv eller ikke
             if behav.active_flag:
                 self.activate_behavior(behav)
-                print("Behavior_object :" + str(behav) + "aktivert")
+                # print("Behavior_object :" + str(behav) + "aktivert")
             else:
                 if behav in self.active_behaviors:
                     self.deactivate_behavior(behav)
-                    print("Behavior_object :" + str(behav) + "deaktivert")
+                    # print("Behavior_object :" + str(behav) + "deaktivert")
         action = self.arbitrator.choose_action()  # kaller arbitrator for å velge en aksjon
         print("arbitrator valgte :" + str(action))
 
         for mot in self.motobs_objects:
             mot.update(action)  # motobs mottar anbefalingen fra Arbitrator
-            print("motob :" + str(mot) + "update action")
+            # print("motob :" + str(mot) + "update action")
 
         time.sleep(self.time_step)  # venter en time_step
         self.total_time += 1
 
         for sens in self.sensobs_objects:  # resetter alle senobs før neste time_step
             sens.reset()
-            print("sensob :" + str(sens) + "resettes")
+            # print("sensob :" + str(sens) + "resettes")
 
 
 def main():
