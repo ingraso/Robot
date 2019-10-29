@@ -61,7 +61,7 @@ class Behavior:
         # ********Should sensobs be informed of the status change here?******
 
         # Call sense_and_act
-        self.sense_and_act()
+        # self.sense_and_act()
 
         # Update behaviors weight with newly calculated value for match_degree
         self.weight = self.priority * self.match_degree
