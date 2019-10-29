@@ -20,14 +20,14 @@ class Arbitrator:
         interval = []
         current_num = 0
         for behavior in active_behaviors:
-            print("the weight of this behavior is:", behavior.weight)
+            # print("the weight of this behavior is:", behavior.weight)
             # Creates a list containing all the intervals for the behaviours
             current_num += behavior.weight
             interval.append(round(current_num, 2))
-        print(interval)
+        print("intervallet er:", interval)
         # Choose a random num in the full interval:
         random_number = random.uniform(0, interval[-1])
-        print(random_number)
+        print("Random number er:", random_number)
         correct_behavior = None
         for i in range(0, len(interval)):
             # print("Nå er vi i for-løkken, runde: ", i)
@@ -36,7 +36,7 @@ class Arbitrator:
                 # Find correct behaviour and end the for-loop
                 correct_behavior = active_behaviors[i]
                 break
-        print("Nå er motor_recomendation", correct_behavior.motor_recommendations)
-        print("Nå er halt_request", correct_behavior.halt_request)
+        # print("Nå er motor_recomendation", correct_behavior.motor_recommendations)
+        # print("Nå er halt_request", correct_behavior.halt_request)
         tupple = (correct_behavior.motor_recommendations, correct_behavior.halt_request)
         return tupple
