@@ -19,7 +19,7 @@ class motob:
 
     def update(self, mot_roc):
         """sette en ny value"""
-        self.value = mot_roc
+        self.value = mot_roc[0]
 
     def operationalize(self, dur=3):
         """apply value, r: Right, l:Left, f:Forward, b:Backward"""
