@@ -30,9 +30,9 @@ class Arbitrator:
         print(random_number)
         correct_behavior = None
         for i in range(0, len(interval)):
-            print("Nå er vi i for-løkken, runde: ", i)
+            # print("Nå er vi i for-løkken, runde: ", i)
             if random_number < interval[i]:
-                print("Nå er vi i if-steningen")
+                # print("Nå er vi i if-setningen")
                 # Find correct behaviour and end the for-loop
                 correct_behavior = active_behaviors[i]
                 break
