@@ -195,6 +195,8 @@ class Behavior3(Behavior):
         """We should activate the behavior if the object is pushed out of line"""
         if self.sensobs[0].get_value() < 5 and self.sensobs[1].get_value() >= 0.5 \
                 and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) <= 0.9):
+            print("Gjennomsnitt ala Karro:", sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()))
+
             return True
         return False
 
@@ -202,6 +204,8 @@ class Behavior3(Behavior):
         """Should usually be deactivated"""
         if self.sensobs[0].get_value() >= 5 and self.sensobs[1].get_value() >= 0.5 \
                 and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) > 0.9):
+            print("Gjennomsnitt ala Karro:", sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()))
+
             return True
         return False
 
