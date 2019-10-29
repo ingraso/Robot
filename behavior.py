@@ -96,7 +96,7 @@ class Behavior1(Behavior):
         print("get_value til ir sensob er", self.ir_sensob.get_value())
         print("summen er", sum(self.ir_sensob.get_value()))
         print("lengden er:", len(self.ir_sensob.get_value()))
-        if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.9:
+        if sum(self.ir_sensob.get_value())==0 or sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.9:
 
             # match degree is low since no line is detected
             # ok to set to 0? Then this will never be chosen, and we don't have
