@@ -88,13 +88,18 @@ def main():
 		BBCON.add_sensor(sensob.LineDetector())  # legg til alle senobs
 		BBCON.add_sensor(sensob.MeasureDistance())  # legg til alle senobs
 		BBCON.add_sensor(sensob.Cameraob())  # legg til alle senobs
+		
+		# lager variabel for behavior 2
+		b2 = behavior.Behavior2(BBCON.sensobs_objects[1], BBCON)
+		
 		BBCON.add_behavior(behavior.Behavior1(BBCON.sensobs_objects[0], BBCON))  # legg til alle behaviours
-		BBCON.add_behavior(behavior.Behavior2(BBCON.sensobs_objects[1], BBCON))
+		#BBCON.add_behavior(behavior.Behavior2(BBCON.sensobs_objects[1], BBCON))
+		BBCON.add_behavior(b2)
 		BBCON.add_behavior(behavior.Behavior3(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON.sensobs_objects[0], BBCON))
 		BBCON.add_behavior(behavior.Behavior4(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior5(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior6(BBCON))
-		BBCON.arbitrator.set_default_current_behavior(behavior.Behavior2)
+		BBCON.arbitrator.set_default_current_behavior(b2)
 		TOTAL_STEPS = 0
 		BUTTON_BUTTON = True
 		zumo_button.ZumoButton().wait_for_press()
