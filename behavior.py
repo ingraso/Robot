@@ -123,7 +123,7 @@ class Behavior1(Behavior):
             elif average > 4:  # line is on right side
                 # turn left
                 degrees = random.randint(45, 100)
-                self.motor_recommendations = ['r', degrees, +0.2]
+                self.motor_recommendations = ['l', degrees, +0.2]
             else:  # line is straight in front
                 # turn a lot
                 degrees = random.randint(100, 200)
