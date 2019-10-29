@@ -312,7 +312,7 @@ class Behavior5(Behavior):
         # Should be deactivated if it is not close to an object (checks for
         # more than 5 cm) or wrong color
         print("In consider_deactivation -> distance:", self.measure_distance_sensob.get_value())
-        if self.measure_distance_sensob.get_value() >= 10: #or \
+        if self.measure_distance_sensob.get_value() > 10: #or \
                 #self.red_camera_sensob.get_value() >= 0.5:  # should we check for None?
             return True
         return False
