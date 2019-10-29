@@ -50,6 +50,11 @@ class Sensob:
         """ returns self.value """
         return self.value
 
+    def reset(self):
+        """ resets self.value """
+        for sensor in self.sensors:
+            sensor.reset()
+
 
 class Proximity(Sensob):
     """ Proximity is an instance of Sensob which
