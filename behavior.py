@@ -109,8 +109,12 @@ class Behavior1(Behavior):
 
             for value_index in range(len(self.ir_sensob.get_value())):
                 product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
-
-            average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
+            
+            average = 0
+            if sum(self.ir_sensob.get_value())==0:
+                average = 3
+            else:
+                average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
 
             if average < 2:  # line is on left side
                 # turn rigth
