@@ -59,9 +59,10 @@ class Behavior:
             self.active_flag = self.consider_activation()
 
         # ********Should sensobs be informed of the status change here?******
-
-        # Call sense_and_act
-        # self.sense_and_act()
+        
+        if self.active_flag:
+            # Call sense_and_act
+            self.sense_and_act()
 
         # Update behaviors weight with newly calculated value for match_degree
         self.weight = self.priority * self.match_degree
