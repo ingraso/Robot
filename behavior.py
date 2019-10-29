@@ -97,6 +97,7 @@ class Behavior1(Behavior):
         # print("summen er", sum(self.ir_sensob.get_value()))
         # print("lengden er:", len(self.ir_sensob.get_value()))
         if sum(self.ir_sensob.get_value())==0 or sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) < 0.4:
+            print("B1's average of line:", sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()))
             # if a line is detected we should really try to avoid it, so match
             # degree is superhigh
             self.match_degree = 1  # is 1 to high, or ok?
