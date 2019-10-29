@@ -93,9 +93,9 @@ class Behavior1(Behavior):
 
     def sense_and_act(self):
         # checks if the ir-sensor sensob har detected a line
-        print("get_value til ir sensob er", self.ir_sensob.get_value())
-        print("summen er", sum(self.ir_sensob.get_value()))
-        print("lengden er:", len(self.ir_sensob.get_value()))
+        # print("get_value til ir sensob er", self.ir_sensob.get_value())
+        # print("summen er", sum(self.ir_sensob.get_value()))
+        # print("lengden er:", len(self.ir_sensob.get_value()))
         if sum(self.ir_sensob.get_value())==0 or sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.9:
 
             # match degree is low since no line is detected
@@ -152,7 +152,7 @@ class Behavior2(Behavior):
         self.sensobs = [measure_distance]
         super().__init__(bbcon, self.sensobs)
         self.priority = 0.3  # This behaviour isn't very important.
-        self.motor_recommendations.append("l")  # Which direction the robot should turn
+        self.motor_recommendations.append("f")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
         self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
 
@@ -221,7 +221,7 @@ class Behavior4(Behavior):
         self.bbcon = bbcon
         super().__init__(bbcon, self.sensobs)
         self.priority = 0.7  # This behaviour is sort of important
-        self.motor_recommendations.append("l")  # Which direction the robot should turn
+        self.motor_recommendations.append("f")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
         self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
 
