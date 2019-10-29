@@ -34,10 +34,8 @@ class Bbcon:
 
     def activate_behavior(self, behavior):
         """Funksjonen for å legge ny behaviour til active_behaviour list"""
-        if behavior in self.behavior_objects:
+        if not behavior in self.active_behaviours:
             self.active_behaviors.append(behavior)
-        else:
-            print("this behaviour is not in the list")
 
     def deactivate_behavior(self, behavior):
         """Funksjonen for å fjerne behaviour fra active_behaviour list """
