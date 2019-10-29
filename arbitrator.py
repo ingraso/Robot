@@ -20,6 +20,7 @@ class Arbitrator:
         interval = []
         current_num = 0
         for behavior in active_behaviors:
+            print("the weight of this behavior is:", behavior.weight)
             # Creates a list containing all the intervals for the behaviours
             current_num += behavior.weight
             interval.append(round(current_num, 2))
