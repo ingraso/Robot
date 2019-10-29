@@ -44,3 +44,5 @@ class motob:
                 self.motor.forward(abs(self.value[2]), dur)
             elif self.value[2] < 0:
                 self.motor.backward(abs(self.value[2]), dur)
+        elif self.value[0] == 's':
+            self.motors.stop()
