@@ -214,14 +214,11 @@ class Behavior3(Behavior):
         self.halt_request = True
         self.motor_recommendations = ['l', 0, 0]
 
-
+"""
 class Behavior4(Behavior):
-    """This class should drive towards objects that are red."""
 
     def __init__(self, measure_distance, camera_ob, bbcon):
-        """Initializes the Behavior4 object. Must have a measure_distance object
-        to keep track of the distance, and a camera_ob to know the color of the
-        object it is driving towards"""
+        
         self.sensobs = [measure_distance, camera_ob]
         self.bbcon = bbcon
         super().__init__(bbcon, self.sensobs)
@@ -231,23 +228,21 @@ class Behavior4(Behavior):
         self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
 
     def consider_activation(self):
-        """This method should be activated if we are within 15 cm of an object"""
         if self.sensobs[0].get_value() <= 10 and self.sensobs[1].get_value() >= 0.5:
             return True
         return False
 
     def consider_deactivation(self):
-        """Should be deactivated if we are further away than 15 cm"""
         if self.sensobs[0].get_value() > 10 or self.sensobs[1].get_value() < 0.5:
             return True
         return False
 
     def sense_and_act(self):
-        """Should update the match_degree and the motor_recommendations"""
+        
         self.match_degree = 0.9
         # We can't come here unless the requirements are met, so this
         # should work.
-
+"""
 
 class Behavior5(Behavior):
     """Behavior that avoids objects that are not red."""
@@ -263,8 +258,8 @@ class Behavior5(Behavior):
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
         # (here 5cm)
-        if self.measure_distance_sensob.get_value() <= 10 and \
-                self.red_camera_sensob.get_value() < 0.5:  # should we check for None?
+        if self.measure_distance_sensob.get_value() <= 10: #and \
+                #self.red_camera_sensob.get_value() < 0.5:  # should we check for None?
             return True
         return False
 
@@ -272,8 +267,8 @@ class Behavior5(Behavior):
         # Should be deactivated if it is not close to an object (checks for
         # more than 5 cm) or wrong color
         print("self.measure_distance_sensob.get_value():", self.measure_distance_sensob.get_value())
-        if self.measure_distance_sensob.get_value() >= 10 or \
-                self.red_camera_sensob.get_value() >= 0.5:  # should we check for None?
+        if self.measure_distance_sensob.get_value() >= 10: #or \
+                #self.red_camera_sensob.get_value() >= 0.5:  # should we check for None?
             return True
         return False
 
@@ -282,8 +277,16 @@ class Behavior5(Behavior):
         # too high? (Set it high since it is kinda important to avoid red)'
         self.match_degree = 0.9
 
+        if self.red_camera_sensob.get_value() >= 0.5:
+            # turn left
+            print("self.motor_recommendations = ", ['f', 0, +0.4])
+            self.motor_recommendations = ['f', 0, +0.4]
+        else:
+            print("self.motor_recommendations = ", ['l', random.randint(45, 100), +0.4])
+            self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
+
         # turn left
-        self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
+        #self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
 
 
 class Behavior6(Behavior):
