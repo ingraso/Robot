@@ -132,15 +132,15 @@ class Behavior1(Behavior):
         if average < 2:  # line is on left side
             # turn rigth
             degrees = random.randint(45, 100)
-            self.motor_recommendations = ['r', degrees, +0.4]
+            self.motor_recommendations = ['r', degrees, +0.2]
         elif average > 4:  # line is on right side
             # turn left
             degrees = random.randint(45, 100)
-            self.motor_recommendations = ['r', degrees, +0.4]
+            self.motor_recommendations = ['r', degrees, +0.2]
         else:  # line is straight in front
             # turn a lot
             degrees = random.randint(100, 200)
-            self.motor_recommendations = ['r', degrees, +0.4]
+            self.motor_recommendations = ['r', degrees, +0.2]
         return
 
 
@@ -154,7 +154,7 @@ class Behavior2(Behavior):
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("f")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
-        self.motor_recommendations.append(0.4)  # The speed (if max-speed is 1)
+        self.motor_recommendations.append(0.2)  # The speed (if max-speed is 1)
 
     def consider_deactivation(self):
         """Method that checks if we should deactivate the behavior. This behaviour
@@ -244,7 +244,7 @@ class Behavior4(Behavior):
     def sense_and_act(self):
         """Should update the match_degree and the motor_recommendations"""
         self.match_degree = 0.9
-        self.motor_recommendations = ['l', 0, 0.4]
+        self.motor_recommendations = ['l', 0, 0.2]
         # We can't come here unless the requirements are met, so this
         # should work.
 
@@ -283,7 +283,7 @@ class Behavior5(Behavior):
         self.match_degree = 0.9
 
         # turn left
-        self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
+        self.motor_recommendations = ['l', random.randint(45, 100), +0.2]
 
 
 class Behavior6(Behavior):
