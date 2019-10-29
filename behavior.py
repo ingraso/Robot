@@ -258,7 +258,7 @@ class Behavior5(Behavior):
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
         # (here 5cm)
-        if self.measure_distance_sensob.get_value() < 5 and \
+        if self.measure_distance_sensob.get_value() <= 10 and \
                 self.red_camera_sensob.get_value() < 0.5:  # should we check for None?
             return True
         return False
