@@ -96,7 +96,7 @@ def main():
 		#BBCON.add_behavior(behavior.Behavior2(BBCON.sensobs_objects[1], BBCON))
 		BBCON.add_behavior(b2)
 		BBCON.add_behavior(behavior.Behavior3(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON.sensobs_objects[0], BBCON))
-		BBCON.add_behavior(behavior.Behavior4(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
+		#BBCON.add_behavior(behavior.Behavior4(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior5(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior6(BBCON))
 		BBCON.arbitrator.set_default_current_behavior(b2)
