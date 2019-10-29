@@ -11,6 +11,10 @@ class Arbitrator:
         """Initializes the arbitrator-object,
         which must have a pointer to it's bbcon"""
         self.bbcon = bbcon
+        self.default = None
+    
+    def set_default_current_behavior(self, default):
+        self.default = default
 
     def choose_action(self):
         """This method will decide which action should be activated, and return
@@ -28,7 +32,7 @@ class Arbitrator:
         # Choose a random num in the full interval:
         random_number = random.uniform(0, interval[-1])
         print("Random number er:", random_number)
-        correct_behavior = None
+        correct_behavior = self.default
         for i in range(0, len(interval)):
             # print("Nå er vi i for-løkken, runde: ", i)
             if random_number < interval[i]:

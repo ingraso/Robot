@@ -94,6 +94,7 @@ def main():
 		BBCON.add_behavior(behavior.Behavior4(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior5(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
 		BBCON.add_behavior(behavior.Behavior6(BBCON))
+		BBCON.arbitrator.set_default_current_behavior(behavior.Behavior2)
 		TOTAL_STEPS = 0
 		BUTTON_BUTTON = True
 		zumo_button.ZumoButton().wait_for_press()
