@@ -69,6 +69,7 @@ class Bbcon:
 
         for mot in self.motobs_objects:
             mot.update(action)  # motobs mottar anbefalingen fra Arbitrator
+            mot.operationalize()  # roboten bør kjøre
             # print("motob :" + str(mot) + "update action")
 
         time.sleep(self.time_step)  # venter en time_step
@@ -77,6 +78,8 @@ class Bbcon:
         for sens in self.sensobs_objects:  # resetter alle senobs før neste time_step
             sens.reset()
             # print("sensob :" + str(sens) + "resettes")
+
+
 
 
 def main():
