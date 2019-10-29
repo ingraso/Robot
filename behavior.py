@@ -96,52 +96,56 @@ class Behavior1(Behavior):
         # print("get_value til ir sensob er", self.ir_sensob.get_value())
         # print("summen er", sum(self.ir_sensob.get_value()))
         # print("lengden er:", len(self.ir_sensob.get_value()))
-        if sum(self.ir_sensob.get_value())==0 or sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.9:
-
-            # match degree is low since no line is detected
-            # ok to set to 0? Then this will never be chosen, and we don't have
-            # to set motors:)
-            self.match_degree = 0
-
-            # if no line is detected the robot should just keep going
-            # therefore the motor recommondation will be to go straight
-
-            # Guessing that first element in list is for left wheel, second element is for right.
-            # Can be changed later
-            # dont' think this is the right way to recommend, but we will fix
-            # (I hope;))
-            self.motor_recommendations = ['l', 0, +0, ]
-
-            return
-
-
+        if sum(self.ir_sensob.get_value())==0 or sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) < 0.4:
             # if a line is detected we should really try to avoid it, so match
-        # degree is superhigh
-        self.match_degree = 1  # is 1 to high, or ok?
+            # degree is superhigh
+            self.match_degree = 1  # is 1 to high, or ok?
 
-        # find which side of the robot the line is detected
+            # find which side of the robot the line is detected
 
 
-        product_values = []
+            product_values = []
 
-        for value_index in range(len(self.ir_sensob.get_value())):
-            product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
+            for value_index in range(len(self.ir_sensob.get_value())):
+                product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
 
-        average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
+            average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
 
-        if average < 2:  # line is on left side
-            # turn rigth
-            degrees = random.randint(45, 100)
-            self.motor_recommendations = ['r', degrees, +0.2]
-        elif average > 4:  # line is on right side
-            # turn left
-            degrees = random.randint(45, 100)
-            self.motor_recommendations = ['r', degrees, +0.2]
-        else:  # line is straight in front
-            # turn a lot
-            degrees = random.randint(100, 200)
-            self.motor_recommendations = ['r', degrees, +0.2]
+            if average < 2:  # line is on left side
+                # turn rigth
+                degrees = random.randint(45, 100)
+                self.motor_recommendations = ['r', degrees, +0.2]
+            elif average > 4:  # line is on right side
+                # turn left
+                degrees = random.randint(45, 100)
+                self.motor_recommendations = ['r', degrees, +0.2]
+            else:  # line is straight in front
+                # turn a lot
+                degrees = random.randint(100, 200)
+                self.motor_recommendations = ['r', degrees, +0.2]
+            return
+            
+            
+            
+
+        # match degree is low since no line is detected
+        # ok to set to 0? Then this will never be chosen, and we don't have
+        # to set motors:)
+        self.match_degree = 0
+
+        # if no line is detected the robot should just keep going
+        # therefore the motor recommondation will be to go straight
+
+        # Guessing that first element in list is for left wheel, second element is for right.
+        # Can be changed later
+        # dont' think this is the right way to recommend, but we will fix
+        # (I hope;))
+        self.motor_recommendations = ['l', 0, +0, ]
+
         return
+
+
+        
 
 
 class Behavior2(Behavior):
