@@ -36,5 +36,7 @@ class Arbitrator:
                 # Find correct behaviour and end the for-loop
                 correct_behavior = active_behaviors[i]
                 break
+        print("Nå er motor_recomendation", correct_behavior.motor_recommendations)
+        print("Nå er halt_request", correct_behavior.halt_request)
         tupple = (correct_behavior.motor_recommendations, correct_behavior.halt_request)
         return tupple
