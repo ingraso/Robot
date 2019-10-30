@@ -46,6 +46,9 @@ class motob:
         elif self.value_drive[0] == 'b' and self.value[1] == 0 and not self.value_halt:
             # Drive backwards
             self.motor.backward(abs(self.value_drive[2]), dur)
+        elif self.value_halt:
+            # If we are done, the haltflag is True, stop
+            self.motors.stop()
         """if cond_left_right:
             # If we are not turning
             if self.value_drive[2] > 0:
@@ -54,6 +57,3 @@ class motob:
             elif self.value_drive[2] < 0:
                 # If the speed is negative, drive backwards
                 self.motor.backward(abs(self.value_drive[2]), dur)"""
-        elif self.value_halt:
-            # If we are done, the haltflag is True, stop
-            self.motors.stop()
