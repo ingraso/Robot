@@ -23,7 +23,7 @@ class motob:
         self.value_drive = mot_roc[0]
         self.value_halt = mot_roc[1]
 
-    def operationalize(self, dur=3):
+    def operationalize(self, dur=2):
         """apply value, r: Right, l:Left, f:Forward, b:Backward"""
         #dur = 3
         turn_speed = self.value_drive[1]/100
@@ -42,11 +42,12 @@ class motob:
             #self.motor.right(self.value_drive[2], dur)
         elif self.value_drive[0] == 'f' and self.value_drive[1] == 0 and not self.value_halt:
             # Drive forward
-            #self.motor.forward(abs(self.value_drive[2]), dur)
-            self.motor.set_value((self.value_drive[2], self.value_drive[2]), self.value_drive[2])
+            self.motor.forward(abs(self.value_drive[2]), dur)
+            #self.motor.set_value((self.value_drive[2], self.value_drive[2]), self.value_drive[2])
         elif self.value_drive[0] == 'b' and self.value[1] == 0 and not self.value_halt:
             # Drive backwards
-            self.motor.set_value((-self.value_drive[2], -self.value_drive[2]), self.value_drive[2])
+            self.motor.backwards(abs(self.value_drive[2]), dur)
+            #self.motor.set_value((-self.value_drive[2], -self.value_drive[2]), self.value_drive[2])
         elif self.value_halt:
             # If we are done, the haltflag is True, stop
             self.motors.stop()
