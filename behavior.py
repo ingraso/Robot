@@ -66,8 +66,8 @@ class Behavior:
 
         # Update behaviors weight with newly calculated value for match_degree
         self.weight = self.priority * self.match_degree
-        print(self, "priority:", self.priority, " match_degree:", self.match_degree)
-        print(self, "weight:", self.weight)
+        #print(self, "priority:", self.priority, " match_degree:", self.match_degree)
+        #print(self, "weight:", self.weight)
 
     def sense_and_act(self):
         """Core computations performed by the behavior that uses sensob readings
