@@ -107,7 +107,7 @@ def main():
 		#zumo_button.ZumoButton().wait_for_press()
 		while BUTTON_BUTTON:
 			TOTAL_STEPS += 1
-			print('this is a step number: ' + str(TOTAL_STEPS))
+			print('\n\nthis is a step number: ' + str(TOTAL_STEPS))
 			BBCON.run_one_timestep()			
 		
 
