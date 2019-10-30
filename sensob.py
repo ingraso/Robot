@@ -38,7 +38,7 @@ class Sensob:
             sensor_data.append(sensor.get_value())
         self.process_sensor_data(sensor_data)
         # print("self.value til" + self.sensors[0] + " er " + self.value)
-        print("(sensob) self.value",self.value, "for sensor:", type(self.sensors))
+        print("(sensob) self.value",self.value, "for sensor:", type(self.sensors[0]))
         return self.value
 
     def process_sensor_data(self, sensor_data):
