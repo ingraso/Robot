@@ -44,8 +44,12 @@ class Bbcon:
     def run_one_timestep(self):
         """Kjøre en runde med viss timestap"""
         for sens in self.sensobs_objects:
-            # oppdaterer alle sensobs
-            sens.update()
+            # oppdaterer alle sensobs utenom Cameraob, siden den ikke skal ta  bilde hvert timestep
+            if sens is not sensob.Cameraob:
+                sens.update()
+                print(str(sens), " ble oppdatert")
+            else:
+                print("*************", str(sens), "ble ikke oppdatert")
             # print("Sensob :" + str(sens) + "har blitt oppdatert")
 
         for behav in self.behavior_objects:
