@@ -45,7 +45,7 @@ class Bbcon:
         """Kjøre en runde med viss timestap"""
         for sens in self.sensobs_objects:
             # oppdaterer alle sensobs utenom Cameraob, siden den ikke skal ta  bilde hvert timestep
-            if sens is not sensob.Cameraob:
+            if type(sens) is not sensob.Cameraob:
                 sens.update()
                 print(str(sens), " ble oppdatert")
             else:
