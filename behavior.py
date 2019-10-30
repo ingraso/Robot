@@ -319,10 +319,11 @@ class Behavior5(Behavior):
 
     def __init__(self, measure_distance_sensob, red_camera_sensob,
                  bbcon):  # hope we have a sensob that checks for red colors;))
-        self.priority = 0.7
+        
         self.measure_distance_sensob = measure_distance_sensob
         self.red_camera_sensob = red_camera_sensob
         super(Behavior5, self).__init__(bbcon, [measure_distance_sensob, red_camera_sensob])
+        self.priority = 0.7
 
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
@@ -373,6 +374,8 @@ class Behavior6(Behavior):
     def __init__(self, bbcon, time_limit=120):
         self.time_limit = time_limit
         super(Behavior6, self).__init__(bbcon, [])
+        self.priority = 1
+        self.match_degree = 1
 
     def consider_activation(self):
         # Should be active if time limit has been exceeded
