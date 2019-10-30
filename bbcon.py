@@ -104,7 +104,7 @@ def main():
 		BBCON.arbitrator.set_default_current_behavior(b2)
 		TOTAL_STEPS = 0
 		BUTTON_BUTTON = True
-		#zumo_button.ZumoButton().wait_for_press()
+		zumo_button.ZumoButton().wait_for_press()
 		while BUTTON_BUTTON:
 			TOTAL_STEPS += 1
 			print('\n\nthis is a step number: ' + str(TOTAL_STEPS))
