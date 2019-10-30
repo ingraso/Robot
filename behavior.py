@@ -77,6 +77,9 @@ class Behavior:
 
 class Behavior1(Behavior):
     """Class for behavior that makes sure the robot backs off if border is detected."""
+    
+    def __str__(self):
+        return "Behavior1"
 
     def __init__(self, ir_sensob, bbcon):
         self.ir_sensob = ir_sensob
@@ -156,6 +159,9 @@ class Behavior1(Behavior):
 
 class Behavior2(Behavior):
     """Class for behavior that drive around searching for objects"""
+    
+    def __str__(self):
+        return "Behavior2"
 
     def __init__(self, measure_distance, bbcon):
         """Initializes behaviour2"""
@@ -195,6 +201,9 @@ class Behavior2(Behavior):
 
 class Behavior3(Behavior):
     """This behavior will check if the object is pushed outside of the tape"""
+    
+    def __str__(self):
+        return "Behavior3"
 
     def __init__(self, measure_distance, camera_ob, line_detector, bbcon):
         """This object should keep track of the line, distance to object,
@@ -302,6 +311,9 @@ class Behavior5(Behavior):
 class Behavior5(Behavior):
     """Behavior that avoids objects that are not red."""
     # red_camera_sensob = object
+    
+    def __str__(self):
+        return "Behavior5"
 
     def __init__(self, measure_distance_sensob, red_camera_sensob,
                  bbcon):  # hope we have a sensob that checks for red colors;))
@@ -351,6 +363,9 @@ class Behavior5(Behavior):
 class Behavior6(Behavior):
     """Behavor that keeps track of total time and declares that a
     run has exceeded its time limit."""
+    
+    def __str__(self):
+        return "Behavior6"
 
     # do we have a time-sensob?/Can we make one?
     def __init__(self, bbcon, time_limit=120):
