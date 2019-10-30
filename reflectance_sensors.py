@@ -118,7 +118,7 @@ class ReflectanceSensors():
             time = self.get_sensor_reading(pin)
 
             index = self.sensor_indices[pin]
-            self.value[index] = 1 - self.normalize(index, time.microseconds)
+            self.value[index] = round(1 - self.normalize(index, time.microseconds), 3)
 
 
     # Uses the calibrated min and maxs for each sensor to return a normalized
