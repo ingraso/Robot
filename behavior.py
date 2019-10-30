@@ -346,7 +346,7 @@ class Behavior5(Behavior):
     def sense_and_act(self):
         # A red object has probably been detected
         # too high? (Set it high since it is kinda important to avoid red)'
-        self.sensobs[1].update()
+        print("(behavior5) return form update of camera sendob:", self.sensobs[1].update())
         print("If we come here a pic should be taken")
         self.match_degree = 0.9
         if self.red_camera_sensob.get_value() >= 0.5:
