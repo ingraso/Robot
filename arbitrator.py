@@ -30,6 +30,7 @@ class Arbitrator:
             print(str(act_b.weight), end=", ")
             if act_b.weight > highest:
                 correct_behavior = act_b
+                highest = act_b.weight
         print()
         
         if correct_behavior == None:
