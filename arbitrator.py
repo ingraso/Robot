@@ -36,10 +36,12 @@ class Arbitrator:
         for i in range(0, len(interval)):
             # print("Nå er vi i for-løkken, runde: ", i)
             if random_number < interval[i]:
-                # print("Nå er vi i if-setningen")
+                print("Nå er vi i if-setningen")
                 # Find correct behaviour and end the for-loop
                 correct_behavior = active_behaviors[i]
                 break
+            else:
+                print("(arbitrator)Kom ikke in i if (arbitrator)")
         # print("Nå er motor_recomendation", correct_behavior.motor_recommendations)
         # print("Nå er halt_request", correct_behavior.halt_request)
         print("correct behavior: {}".format(correct_behavior.motor_recommendations))
