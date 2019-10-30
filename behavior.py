@@ -203,7 +203,7 @@ class Behavior3(Behavior):
 
     def consider_activation(self):
         """We should activate the behavior if the object is pushed out of line"""
-        if self.sensobs[0].get_value() < 5 and self.sensobs[1].get_value() >= 0.5 \
+        if self.sensobs[0].get_value() < 5 \ # and self.sensobs[1].get_value() >= 0.5 \
                 and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) <= 0.9):
             print("Gjennomsnitt ala Karro:", sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()))
 
@@ -212,17 +212,23 @@ class Behavior3(Behavior):
 
     def consider_deactivation(self):
         """Should usually be deactivated"""
-        if self.sensobs[0].get_value() >= 5 and self.sensobs[1].get_value() >= 0.5 \
-                and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) > 0.9):
+        if self.sensobs[0].get_value() >= 5 \ # and self.sensobs[1].get_value() >= 0.5 \
+                or (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) > 0.9):
+            # Switched for and to or
             print("Gjennomsnitt ala Karro:", sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()))
 
             return True
         return False
 
     def sense_and_act(self):
-        self.match_degree = 1
-        self.halt_request = True
-        self.motor_recommendations = ['l', 0, 0]
+        self.sensobs[1].update()
+        if self.sensobs[1].value >= 0.5:
+            self.match_degree = 1
+            self.halt_request = True
+            self.motor_recommendations = ['l', 0, 0]
+        else:
+            self.match_degree = 0
+            self.motor_recommendations = ['l', 60, 0.2]
 """
 class Behavior4(Behavior):
 
@@ -321,8 +327,9 @@ class Behavior5(Behavior):
     def sense_and_act(self):
         # A red object has probably been detected
         # too high? (Set it high since it is kinda important to avoid red)'
-        self.match_degree = 0.9
+        self.sensobs[1].update()
         print("If we come here a pic should be taken")
+        self.match_degree = 0.9
         if self.red_camera_sensob.get_value() >= 0.5:
             # keep going
             print("self.motor_recommendations = ", ['f', 0, +0.4])
