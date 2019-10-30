@@ -66,6 +66,7 @@ class Behavior:
 
         # Update behaviors weight with newly calculated value for match_degree
         self.weight = self.priority * self.match_degree
+        print(self, "weight:", self.weight)
 
     def sense_and_act(self):
         """Core computations performed by the behavior that uses sensob readings
@@ -346,7 +347,6 @@ class Behavior5(Behavior):
         self.sensobs[1].update()
         print("If we come here a pic should be taken")
         self.match_degree = 0.9
-        print("(behavior5) weight:", self.weight)
         if self.red_camera_sensob.get_value() >= 0.5:
             # keep going
             print("self.motor_recommendations = ", ['f', 0, +0.4])
