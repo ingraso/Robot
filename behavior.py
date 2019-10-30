@@ -111,7 +111,7 @@ class Behavior1(Behavior):
 
             # find which side of the robot the line is detected
 
-
+            degreees = 180
             product_values = []
 
             for value_index in range(len(self.ir_sensob.get_value())):
@@ -126,17 +126,17 @@ class Behavior1(Behavior):
             if average < 2:  # line is on left side
                 # turn rigth
                 print("(behavior1) if")
-                degrees = random.randint(45, 100)
+                #degrees = random.randint(45, 100)
                 self.motor_recommendations = ['r', degrees, +0.5]
             elif average > 4:  # line is on right side
                 # turn left
                 print("(behavior1) elif")
-                degrees = random.randint(45, 100)
+                #degrees = random.randint(45, 100)
                 self.motor_recommendations = ['l', degrees, +0.5]
             else:  # line is straight in front
                 # turn a lot
                 print("(behavior1) else")
-                degrees = random.randint(100, 200)
+                #degrees = random.randint(100, 200)
                 self.motor_recommendations = ['r', degrees, +0.5]
             return
             
