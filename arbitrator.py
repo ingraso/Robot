@@ -42,5 +42,6 @@ class Arbitrator:
                 break
         # print("Nå er motor_recomendation", correct_behavior.motor_recommendations)
         # print("Nå er halt_request", correct_behavior.halt_request)
+        print("correct behavior: {}".format(correct_behavior.motor_recommendations))
         tupple = (correct_behavior.motor_recommendations, correct_behavior.halt_request)
         return tupple
