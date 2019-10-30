@@ -103,7 +103,7 @@ def main():
 		BBCON.add_behavior(behavior.Behavior6(BBCON))
 		BBCON.arbitrator.set_default_current_behavior(b2)
 		TOTAL_STEPS = 0
-		BUTTON_BUTTON = True
+		BUTTON_BUTTON = False
 		zumo_button.ZumoButton().wait_for_press()
 		while BUTTON_BUTTON:
 			TOTAL_STEPS += 1
