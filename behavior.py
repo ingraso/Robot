@@ -85,8 +85,9 @@ class Behavior1(Behavior):
 
     def __init__(self, ir_sensob, bbcon):
         self.ir_sensob = ir_sensob
-        self.priority = 1
+        
         super(Behavior1, self).__init__(bbcon, [ir_sensob])
+        self.priority = 1
 
     def consider_activation(self):
         # Should always be active to make sure that the robot does not drive
