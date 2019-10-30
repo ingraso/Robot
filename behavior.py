@@ -179,14 +179,18 @@ class Behavior2(Behavior):
     def sense_and_act(self):
         """will update the match_degree. The motor_recommendations
         are always the same for this behavior"""
-        for sensob in self.sensobs:
+        if self.sensobs[0].get_value() > 10:
+            self.match_degree = 0.6
+        else:
+            self.match_dregree = 0
+        """for sensob in self.sensobs:
             # The ultrasound-sensobs value represents the distance in cm (float)
             if sensob.get_value() > 10:
                 # Before we find the object, the match_degree should be high
                 self.match_degree = 0.6
             else:
                 # If we are closer than 10 cm we should use the camera
-                self.match_degree = 0
+                self.match_degree = """
 
 
 class Behavior3(Behavior):
