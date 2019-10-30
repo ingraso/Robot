@@ -27,6 +27,7 @@ class Arbitrator:
         correct_behavior = None
         
         for act_b in active_behaviors:
+            print(str(act_b.weight) end=" "))
             if act_b.weight > highest:
                 correct_behavior = act_b
         
