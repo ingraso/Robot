@@ -32,6 +32,10 @@ class Arbitrator:
                 correct_behavior = act_b
         print()
         
+        if correct_behavior == None:
+            print("_____________________KODEN SKULLE KRASJET PGA NONE______________")
+            correct_behavior = self.default
+        
         """
         interval = []
         current_num = 0
