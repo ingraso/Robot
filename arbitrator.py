@@ -21,6 +21,16 @@ class Arbitrator:
         the tuple """
         active_behaviors = self.bbcon.active_behaviors
         print(active_behaviors)
+        
+        # finner behavior med høyest weight
+        highest = 0
+        correct_behavior = None
+        
+        for act_b in active_behaviors:
+            if act_b.weight > highest:
+                correct_behavior = act_b
+        
+        """
         interval = []
         current_num = 0
         for behavior in active_behaviors:
@@ -44,6 +54,8 @@ class Arbitrator:
                 print("(arbitrator)Kom ikke in i if (arbitrator)")
         # print("Nå er motor_recomendation", correct_behavior.motor_recommendations)
         # print("Nå er halt_request", correct_behavior.halt_request)
+        """
+        
         print("correct behavior: {}".format(correct_behavior.motor_recommendations))
         tupple = (correct_behavior.motor_recommendations, correct_behavior.halt_request)
         return tupple
