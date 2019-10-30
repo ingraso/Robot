@@ -25,11 +25,12 @@ class Arbitrator:
         # finner behavior med høyest weight
         highest = 0
         correct_behavior = None
-        
+        print("Weights for active behaviors:", end="")
         for act_b in active_behaviors:
-            print(str(act_b.weight) end=" "))
+            print(str(act_b.weight) end=", "))
             if act_b.weight > highest:
                 correct_behavior = act_b
+        print()
         
         """
         interval = []
