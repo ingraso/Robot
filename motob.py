@@ -50,7 +50,7 @@ class motob:
             #self.motor.set_value((-self.value_drive[2], -self.value_drive[2]), self.value_drive[2])
         elif self.value_halt:
             # If we are done, the haltflag is True, stop
-            self.motors.stop()
+            self.motor.stop()
         """if cond_left_right:
             # If we are not turning
             if self.value_drive[2] > 0:
