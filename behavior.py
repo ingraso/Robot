@@ -188,7 +188,7 @@ class Behavior2(Behavior):
         if self.sensobs[0].get_value() > 10:
             self.match_degree = 0.6
         else:
-            self.match_dregree = 0
+            self.match_degree = 0
         """for sensob in self.sensobs:
             # The ultrasound-sensobs value represents the distance in cm (float)
             if sensob.get_value() > 10:
