@@ -26,7 +26,7 @@ class motob:
     def operationalize(self, dur=3):
         """apply value, r: Right, l:Left, f:Forward, b:Backward"""
         #dur = 3
-        turn_speed = abs(self.value_drive[2]) + 0.2
+        turn_speed = self.value_drive[1]/100
         # cond_left_right = False
         # if self.value_drive[1] == 0:
             # If we are turning 0 degrees, cond_left_right = True
@@ -34,12 +34,12 @@ class motob:
         #print("I am in loop")
         if self.value_drive[0] == 'l' and self.value_drive[1] > 0 and not self.value_halt:
             # turn left and we are turning, but why not call left?
-            # self.motor.set_value((self.value_drive[2], -self.value_drive[2]), turn_speed)#10 eller dur
-            self.motor.left(self.value_drive[2], dur)
+            self.motor.set_value((self.value_drive[2], -self.value_drive[2]), turn_speed)#10 eller dur
+            #self.motor.left(self.value_drive[2], dur)
         elif self.value_drive[0] == 'r' and self.value_drive[1] > 0 and not self.value_halt:
             # turn right, and we are turning, try motors.right??
-            # self.motor.set_value((-self.value_drive[2], self.value_drive[2]), turn_speed)#10 eller dur
-            self.motor.right(self.value_drive[2], dur)
+            self.motor.set_value((-self.value_drive[2], self.value_drive[2]), turn_speed)#10 eller dur
+            #self.motor.right(self.value_drive[2], dur)
         elif self.value_drive[0] == 'f' and self.value_drive[1] == 0 and not self.value_halt:
             # Drive forward
             self.motor.forward(abs(self.value_drive[2]), dur)
