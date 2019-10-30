@@ -355,8 +355,9 @@ class Behavior5(Behavior):
             self.motor_recommendations = ['f', 0, +0.4]
         else:
             # turn left
-            print("self.motor_recommendations = ", ['l', random.randint(45, 100), +0.4])
-            self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
+            number_degrees = random.randint(30, 50)
+            print("self.motor_recommendations = ", ['l', number_degrees, +0.4])
+            self.motor_recommendations = ['l', number_degrees, +0.4]
 
         # turn left
         #self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
