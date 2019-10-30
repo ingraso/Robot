@@ -33,14 +33,18 @@ def dancer():
 def explorer(dist=10):
     ZumoButton().wait_for_press()
     m = Motors(); u = Ultrasonic()
-    while u.update() > dist:
+    u.update()
+    while u.get_value() > dist:
         m.forward(.2,0.2)
+        u.update()
     m.backward(.1,.5)
     m.left(.5,3)
     m.right(.5,3.5)
     sleep(2)
-    while u.update() < dist*5:
+    u.update()
+    while u.get_value() < dist*5:
         m.backward(.2,0.2)
+        u.update()
     m.left(.75,5)
 
 
