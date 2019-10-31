@@ -15,7 +15,7 @@ class Bbcon:
 
     def __init__(self, motobs_objects):
         """Initierer en instans av BBCON"""
-        self.time_step = 0.5  # må velge varighet på time_step for robot
+        self.time_step = 0.1  # må velge varighet på time_step for robot
         self.behavior_objects = []  # alle behaviour_objects som finnes
         self.sensobs_objects = []  # alle sensobs objekter som robot har
         self.active_behaviors = []  # behaviours som LAGER anbefalinger basert på input fra sensobs
