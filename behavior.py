@@ -103,8 +103,8 @@ class Behavior1(Behavior):
         # print("get_value til ir sensob er", self.ir_sensob.get_value())
         # print("summen er", sum(self.ir_sensob.get_value()))
         # print("lengden er:", len(self.ir_sensob.get_value()))
-        if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.4:
-            print("B1's average of line:", sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()))
+        # if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.4:
+            # print("B1's average of line:", sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()))
             # if a line is detected we should really try to avoid it, so match
             # degree is superhigh
             self.match_degree = 1  # is 1 to high, or ok?
@@ -112,14 +112,25 @@ class Behavior1(Behavior):
             # find which side of the robot the line is detected
 
             degrees = 100
-            product_values = []
+            # product_values = []
 
-            for value_index in range(len(self.ir_sensob.get_value())):
-                product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
+            # for value_index in range(len(self.ir_sensob.get_value())):
+                # product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
             
-            print("(behavior1) sensorlist:", self.ir_sensob.get_value(), "product_values:", product_values)
-            average = 0
-            if sum(self.ir_sensob.get_value())>0.9:
+            # print("(behavior1) sensorlist:", self.ir_sensob.get_value(), "product_values:", product_values)
+            # average = 0
+            
+            if self.ir_sensob.get_value()[0] > 0.9:
+                # White line on right side, turn left
+                self.motor_recommendations = ['l', 110, 0.4]
+            elif self.ir_sensob.get_value()[2] > 0.9:
+                # White line in the middle, turn a lot
+                self.motor_recommendations = ['l', 150, 0.4]
+            elif self.ir_sensob.get_value()[5] > 0.9:
+                # White line on left side, turn right:
+                self.motor_recommendations = ['r', 110, 0.4]
+            
+            """if sum(self.ir_sensob.get_value())>0.9:
                 average = 3
             else:
                 average = sum(product_values) / sum(self.ir_sensob.get_value()) - 1
@@ -142,7 +153,7 @@ class Behavior1(Behavior):
                 #degrees = random.randint(100, 200)
                 degrees = 150
                 self.motor_recommendations = ['r', degrees, +0.5]
-            return
+            return"""
             
             
             
