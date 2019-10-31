@@ -370,11 +370,13 @@ class Behavior5(Behavior):
         print("If we come here a pic should be taken")
         self.match_degree = 0.9
         if self.red_camera_sensob.get_value() >= 0.5:
+            print("(behavior5) red object detected")
             # keep going
             print("self.motor_recommendations = ", ['f', 0, +0.1])
             self.motor_recommendations = ['f', 0, +0.1]
         else:
             # turn left
+            print("(behavior5) wrong object detected")
             number_degrees = random.randint(45, 90)
             print("self.motor_recommendations = ", ['l', number_degrees, +0.4])
             self.motor_recommendations = ['l', number_degrees, +0.4]
