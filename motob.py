@@ -6,7 +6,6 @@
 from motors import Motors
 
 
-
 class motob:
     """Motob klasse har en motor"""
 
@@ -26,8 +25,8 @@ class motob:
     def operationalize(self, dur=0.05):
         """apply value, r: Right, l:Left, f:Forward, b:Backward"""
         #dur = 3
-        turn_speed = self.value_drive[1]/100
-        if turn_speed>1:
+        turn_speed = self.value_drive[1] / 100
+        if turn_speed > 1:
             turn_speed = 1
         # cond_left_right = False
         # if self.value_drive[1] == 0:
@@ -36,28 +35,24 @@ class motob:
         #print("I am in loop")
         if self.value_drive[0] == 'l' and self.value_drive[1] > 0 and not self.value_halt:
             # turn left and we are turning, but why not call left?
-            self.motor.set_value((-self.value_drive[2], self.value_drive[2]), turn_speed)#10 eller dur
+            self.motor.set_value(
+                (-self.value_drive[2],
+                 self.value_drive[2]),
+                turn_speed)  # 10 eller dur
             #self.motor.left(self.value_drive[2], dur)
         elif self.value_drive[0] == 'r' and self.value_drive[1] > 0 and not self.value_halt:
             # turn right, and we are turning, try motors.right??
-            self.motor.set_value((self.value_drive[2], -self.value_drive[2]), turn_speed)#10 eller dur
+            self.motor.set_value(
+                (self.value_drive[2], -self.value_drive[2]), turn_speed)  # 10 eller dur
             #self.motor.right(self.value_drive[2], dur)
         elif self.value_drive[0] == 'f' and self.value_drive[1] == 0 and not self.value_halt:
             # Drive forward
             self.motor.forward(abs(self.value_drive[2]), dur)
             #self.motor.set_value((self.value_drive[2], self.value_drive[2]), self.value_drive[2])
-        elif self.value_drive[0] == 'b' and self.value[1] == 0 and not self.value_halt:
+        elif self.value_drive[0] == 'b' and self.value_drive[1] == 0 and not self.value_halt:
             # Drive backwards
-            self.motor.backwards(abs(self.value_drive[2]), dur)
+            self.motor.backward(abs(self.value_drive[2]), dur)
             #self.motor.set_value((-self.value_drive[2], -self.value_drive[2]), self.value_drive[2])
         elif self.value_halt:
             # If we are done, the haltflag is True, stop
             self.motor.stop()
-        """if cond_left_right:
-            # If we are not turning
-            if self.value_drive[2] > 0:
-                # If the speed is positive, drive forward
-                self.motor.forward(abs(self.value_drive[2]), dur)
-            elif self.value_drive[2] < 0:
-                # If the speed is negative, drive backwards
-                self.motor.backward(abs(self.value_drive[2]), dur)"""
