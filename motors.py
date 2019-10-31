@@ -108,5 +108,5 @@ class Motors():
     def persist(self, duration):
         if duration:
             sleep(duration)
-            self.stop()
+            #self.stop()
 
