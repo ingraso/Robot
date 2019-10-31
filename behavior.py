@@ -372,8 +372,8 @@ class Behavior5(Behavior):
         if self.red_camera_sensob.get_value() >= 0.5:
             print("(behavior5) red object detected")
             # keep going
-            print("self.motor_recommendations = ", ['f', 0, +0.1])
-            self.motor_recommendations = ['f', 0, +0.1]
+            print("self.motor_recommendations = ", ['f', 0, +0.2])
+            self.motor_recommendations = ['f', 0, +0.2]
         else:
             # turn left
             print("(behavior5) wrong object detected")
