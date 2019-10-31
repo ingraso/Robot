@@ -122,13 +122,13 @@ class Behavior1(Behavior):
             #print("Boarder values(colors): {}".format(self.ir_sensob.get_value()))
             if self.ir_sensob.get_value()[2] > 0.5:
                 # White line in the middle, turn a lot
-                self.motor_recommendations = ['r', 100, 0.4]
+                self.motor_recommendations = ['r', 100, 0.5]
             elif self.ir_sensob.get_value()[0] > 0.5:
                 # White line on left side, turn right
-                self.motor_recommendations = ['r', 100, 0.4]
+                self.motor_recommendations = ['r', 100, 0.5]
             elif self.ir_sensob.get_value()[5] > 0.5:
                 # White line on right side, turn left:
-                self.motor_recommendations = ['l', 100, 0.4]
+                self.motor_recommendations = ['l', 100, 0.5]
             return
             
             """if sum(self.ir_sensob.get_value())>0.9:
@@ -192,7 +192,7 @@ class Behavior2(Behavior):
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("f")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
-        self.motor_recommendations.append(0.15)  # The speed (if max-speed is 1)
+        self.motor_recommendations.append(0.3)  # The speed (if max-speed is 1)
 
     def consider_deactivation(self):
         """Method that checks if we should deactivate the behavior. This behaviour
@@ -372,8 +372,8 @@ class Behavior5(Behavior):
         if self.red_camera_sensob.get_value() >= 0.3:
             print("(behavior5) red object detected")
             # keep going
-            print("self.motor_recommendations = ", ['f', 0, +0.2])
-            self.motor_recommendations = ['f', 0, +0.2]
+            print("self.motor_recommendations = ", ['f', 0, +0.5])
+            self.motor_recommendations = ['f', 0, +0.5]
         else:
             # turn left
             print("(behavior5) wrong object detected")
