@@ -117,6 +117,7 @@ class Behavior1(Behavior):
             for value_index in range(len(self.ir_sensob.get_value())):
                 product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
             
+            print("(behavior1) sensorlist:", self.ir_sensob.get_value(), "product_values:", product_values)
             average = 0
             if sum(self.ir_sensob.get_value())>0.9:
                 average = 3
