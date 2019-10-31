@@ -2,6 +2,10 @@ import RPi.GPIO as GPIO
 
 
 class IRProximitySensor:
+    
+    def __repr__(self):
+        return "IRProximitySensor"
+    
     def __init__(self):
         self.value = None
         self.read_pin_1 = 8
