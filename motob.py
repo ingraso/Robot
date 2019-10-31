@@ -23,7 +23,7 @@ class motob:
         self.value_drive = mot_roc[0]
         self.value_halt = mot_roc[1]
 
-    def operationalize(self, dur=2):
+    def operationalize(self, dur=1):
         """apply value, r: Right, l:Left, f:Forward, b:Backward"""
         #dur = 3
         turn_speed = self.value_drive[1]/100
