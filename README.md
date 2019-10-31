@@ -4,7 +4,7 @@ To run:
 
 ssh plab@robotXXidi.ntnu.no
 
-> pass står i oppgaveteksten
+> passord står i oppgaveteksten
 
 cd Robot/
 
