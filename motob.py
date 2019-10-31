@@ -27,6 +27,8 @@ class motob:
         """apply value, r: Right, l:Left, f:Forward, b:Backward"""
         #dur = 3
         turn_speed = self.value_drive[1]/100
+        if turn_speed>1:
+            turn_speed = 1
         # cond_left_right = False
         # if self.value_drive[1] == 0:
             # If we are turning 0 degrees, cond_left_right = True
