@@ -180,7 +180,7 @@ class Behavior2(Behavior):
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("f")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
-        self.motor_recommendations.append(0.1)  # The speed (if max-speed is 1)
+        self.motor_recommendations.append(0.15)  # The speed (if max-speed is 1)
 
     def consider_deactivation(self):
         """Method that checks if we should deactivate the behavior. This behaviour
