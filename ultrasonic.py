@@ -2,6 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 class Ultrasonic():
+    
+    def __repr__(self):
+        return "UltrasonicSensor"
 
     def __init__(self):
         self.value = None
