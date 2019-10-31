@@ -103,7 +103,7 @@ class Behavior1(Behavior):
         # print("get_value til ir sensob er", self.ir_sensob.get_value())
         # print("summen er", sum(self.ir_sensob.get_value()))
         # print("lengden er:", len(self.ir_sensob.get_value()))
-        # if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.4:
+        if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.2:
             # print("B1's average of line:", sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()))
             # if a line is detected we should really try to avoid it, so match
             # degree is superhigh
