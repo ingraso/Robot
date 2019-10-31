@@ -59,7 +59,7 @@ class Behavior:
             self.active_flag = self.consider_activation()
 
         # ********Should sensobs be informed of the status change here?******
-        
+
         if self.active_flag:
             # Call sense_and_act
             self.sense_and_act()
@@ -76,16 +76,15 @@ class Behavior:
         # Calculate new value for match_degree
 
 
-
 class Behavior1(Behavior):
     """Class for behavior that makes sure the robot backs off if border is detected."""
-    
+
     def __repr__(self):
         return "Behavior1"
 
     def __init__(self, ir_sensob, bbcon):
         self.ir_sensob = ir_sensob
-        
+
         super(Behavior1, self).__init__(bbcon, [ir_sensob])
         self.priority = 0.99
 
@@ -103,7 +102,8 @@ class Behavior1(Behavior):
         # print("get_value til ir sensob er", self.ir_sensob.get_value())
         # print("summen er", sum(self.ir_sensob.get_value()))
         # print("lengden er:", len(self.ir_sensob.get_value()))
-        if sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()) > 0.2:
+        if sum(self.ir_sensob.get_value()) / \
+                len(self.ir_sensob.get_value()) > 0.2:
             # print("B1's average of line:", sum(self.ir_sensob.get_value()) / len(self.ir_sensob.get_value()))
             # if a line is detected we should really try to avoid it, so match
             # degree is superhigh
@@ -115,8 +115,8 @@ class Behavior1(Behavior):
             # product_values = []
 
             # for value_index in range(len(self.ir_sensob.get_value())):
-                # product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
-            
+            # product_values.append(self.ir_sensob.get_value()[value_index] * (value_index + 1))
+
             # print("(behavior1) sensorlist:", self.ir_sensob.get_value(), "product_values:", product_values)
             # average = 0
             #print("Boarder values(colors): {}".format(self.ir_sensob.get_value()))
@@ -130,7 +130,7 @@ class Behavior1(Behavior):
                 # White line on right side, turn left:
                 self.motor_recommendations = ['l', 100, 0.4]
             return
-            
+
             """if sum(self.ir_sensob.get_value())>0.9:
                 average = 3
             else:
@@ -155,9 +155,6 @@ class Behavior1(Behavior):
                 degrees = 150
                 self.motor_recommendations = ['r', degrees, +0.5]
             return"""
-            
-            
-            
 
         # match degree is low since no line is detected
         # ok to set to 0? Then this will never be chosen, and we don't have
@@ -176,12 +173,9 @@ class Behavior1(Behavior):
         return
 
 
-        
-
-
 class Behavior2(Behavior):
     """Class for behavior that drive around searching for objects"""
-    
+
     def __repr__(self):
         return "Behavior2"
 
@@ -190,9 +184,12 @@ class Behavior2(Behavior):
         self.sensobs = [measure_distance]
         super().__init__(bbcon, self.sensobs)
         self.priority = 0.3  # This behaviour isn't very important.
-        self.motor_recommendations.append("f")  # Which direction the robot should turn
-        self.motor_recommendations.append(0)  # How many degrees the robot should turn
-        self.motor_recommendations.append(0.19)  # The speed (if max-speed is 1)
+        # Which direction the robot should turn
+        self.motor_recommendations.append("f")
+        # How many degrees the robot should turn
+        self.motor_recommendations.append(0)
+        # The speed (if max-speed is 1)
+        self.motor_recommendations.append(0.19)
 
     def consider_deactivation(self):
         """Method that checks if we should deactivate the behavior. This behaviour
@@ -219,15 +216,17 @@ class Behavior2(Behavior):
             else:
                 # If we are closer than 10 cm we should use the camera
                 self.match_degree = """
+
+
 """
 
 class Behavior3(Behavior):
-    
+
     def __repr__(self):
         return "Behavior3"
 
     def __init__(self, measure_distance, camera_ob, line_detector, bbcon):
-        
+
         self.sensobs = [measure_distance, camera_ob, line_detector]
         self.bbcon = bbcon
         super().__init__(bbcon, self.sensobs)
@@ -235,7 +234,7 @@ class Behavior3(Behavior):
         self.priority = 1
 
     def consider_activation(self):
-       
+
         # and self.sensobs[1].get_value() >= 0.5 \
         if self.sensobs[0].get_value() < 5 and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) <= 0.4):
             print("Gjennomsnitt ala Karro:", sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()))
@@ -244,7 +243,7 @@ class Behavior3(Behavior):
         return False
 
     def consider_deactivation(self):
-        
+
          # and self.sensobs[1].get_value() >= 0.5 \
         if self.sensobs[0].get_value() >= 5 or (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) > 0.4):
             # Switched for and to or
@@ -263,12 +262,12 @@ class Behavior3(Behavior):
             self.match_degree = 0
             self.motor_recommendations = ['l', 60, 0.2]
 """
-            
+
 """
 class Behavior4(Behavior):
 
     def __init__(self, measure_distance, camera_ob, bbcon):
-        
+
         self.sensobs = [measure_distance, camera_ob]
         self.bbcon = bbcon
         super().__init__(bbcon, self.sensobs)
@@ -330,43 +329,53 @@ class Behavior5(Behavior):
         self.motor_recommendations = ['l', random.randint(45, 100), +0.2]
 """
 
+
 class Behavior5(Behavior):
     """Behavior that avoids objects that are not red."""
     # red_camera_sensob = object
-    
+
     def __repr__(self):
         return "Behavior5"
 
     def __init__(self, measure_distance_sensob, red_camera_sensob,
                  bbcon):  # hope we have a sensob that checks for red colors;))
-        
+
         self.measure_distance_sensob = measure_distance_sensob
         self.red_camera_sensob = red_camera_sensob
-        super(Behavior5, self).__init__(bbcon, [measure_distance_sensob, red_camera_sensob])
+        super(
+            Behavior5, self).__init__(
+            bbcon, [
+                measure_distance_sensob, red_camera_sensob])
         self.priority = 0.7
 
     def consider_activation(self):
         # Should only be activated if it is closer than a certain distance
         # (here 5cm)
-        print("In consider_activation -> distance:", self.measure_distance_sensob.get_value()) 
-        if self.measure_distance_sensob.get_value() <= 10: #and \
-                #self.red_camera_sensob.get_value() < 0.5:  # should we check for None?
+        print("In consider_activation -> distance:",
+              self.measure_distance_sensob.get_value())
+        if self.measure_distance_sensob.get_value() <= 10:  # and \
+                # self.red_camera_sensob.get_value() < 0.5:  # should we check
+                # for None?
             return True
         return False
 
     def consider_deactivation(self):
         # Should be deactivated if it is not close to an object (checks for
         # more than 5 cm) or wrong color
-        print("In consider_deactivation -> distance:", self.measure_distance_sensob.get_value())
-        if self.measure_distance_sensob.get_value() > 10: #or \
-                #self.red_camera_sensob.get_value() >= 0.5:  # should we check for None?
+        print("In consider_deactivation -> distance:",
+              self.measure_distance_sensob.get_value())
+        if self.measure_distance_sensob.get_value() > 10:  # or \
+                # self.red_camera_sensob.get_value() >= 0.5:  # should we check
+                # for None?
             return True
         return False
 
     def sense_and_act(self):
         # A red object has probably been detected
         # too high? (Set it high since it is kinda important to avoid red)'
-        print("(behavior5) return form update of camera sendob:", self.sensobs[1].update())
+        print(
+            "(behavior5) return form update of camera sendob:",
+            self.sensobs[1].update())
         print("If we come here a pic should be taken")
         self.match_degree = 0.9
         if self.red_camera_sensob.get_value() >= 0.3:
@@ -385,11 +394,10 @@ class Behavior5(Behavior):
         #self.motor_recommendations = ['l', random.randint(45, 100), +0.4]
 
 
-
 class Behavior6(Behavior):
     """Behavor that keeps track of total time and declares that a
     run has exceeded its time limit."""
-    
+
     def __repr__(self):
         return "Behavior6"
 
