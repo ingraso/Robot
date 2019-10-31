@@ -119,7 +119,7 @@ class Behavior1(Behavior):
             
             # print("(behavior1) sensorlist:", self.ir_sensob.get_value(), "product_values:", product_values)
             # average = 0
-            print("Boarder values(colors): {}".format(self.ir_sensob.get_value()))
+            #print("Boarder values(colors): {}".format(self.ir_sensob.get_value()))
             if self.ir_sensob.get_value()[2] > 0.5:
                 # White line in the middle, turn a lot
                 self.motor_recommendations = ['l', 80, 0.4]
