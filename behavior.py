@@ -180,7 +180,7 @@ class Behavior2(Behavior):
         self.priority = 0.3  # This behaviour isn't very important.
         self.motor_recommendations.append("f")  # Which direction the robot should turn
         self.motor_recommendations.append(0)  # How many degrees the robot should turn
-        self.motor_recommendations.append(0.2)  # The speed (if max-speed is 1)
+        self.motor_recommendations.append(0.1)  # The speed (if max-speed is 1)
 
     def consider_deactivation(self):
         """Method that checks if we should deactivate the behavior. This behaviour
@@ -359,8 +359,8 @@ class Behavior5(Behavior):
         self.match_degree = 0.9
         if self.red_camera_sensob.get_value() >= 0.5:
             # keep going
-            print("self.motor_recommendations = ", ['f', 0, +0.4])
-            self.motor_recommendations = ['f', 0, +0.4]
+            print("self.motor_recommendations = ", ['f', 0, +0.1])
+            self.motor_recommendations = ['f', 0, +0.1]
         else:
             # turn left
             number_degrees = random.randint(45, 90)
