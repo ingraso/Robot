@@ -264,7 +264,7 @@ class Behavior3(Behavior):
             self.motor_recommendations = ['l', 60, 0.2]
 """
             
-            """
+"""
 class Behavior4(Behavior):
 
     def __init__(self, measure_distance, camera_ob, bbcon):
