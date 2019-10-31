@@ -44,11 +44,11 @@ class motob:
             #self.motor.right(self.value_drive[2], dur)
         elif self.value_drive[0] == 'f' and self.value_drive[1] == 0 and not self.value_halt:
             # Drive forward
-            self.motor.forward(abs(self.value_drive[2]), dur)
+            self.motor.forward(abs(self.value_drive[2]))
             #self.motor.set_value((self.value_drive[2], self.value_drive[2]), self.value_drive[2])
         elif self.value_drive[0] == 'b' and self.value[1] == 0 and not self.value_halt:
             # Drive backwards
-            self.motor.backwards(abs(self.value_drive[2]), dur)
+            self.motor.backwards(abs(self.value_drive[2]))
             #self.motor.set_value((-self.value_drive[2], -self.value_drive[2]), self.value_drive[2])
         elif self.value_halt:
             # If we are done, the haltflag is True, stop
