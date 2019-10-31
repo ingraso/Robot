@@ -122,13 +122,13 @@ class Behavior1(Behavior):
             #print("Boarder values(colors): {}".format(self.ir_sensob.get_value()))
             if self.ir_sensob.get_value()[2] > 0.5:
                 # White line in the middle, turn a lot
-                self.motor_recommendations = ['r', 80, 0.4]
+                self.motor_recommendations = ['r', 100, 0.4]
             elif self.ir_sensob.get_value()[0] > 0.5:
                 # White line on left side, turn right
-                self.motor_recommendations = ['r', 70, 0.4]
+                self.motor_recommendations = ['r', 100, 0.4]
             elif self.ir_sensob.get_value()[5] > 0.5:
                 # White line on right side, turn left:
-                self.motor_recommendations = ['l', 70, 0.4]
+                self.motor_recommendations = ['l', 100, 0.4]
             return
             
             """if sum(self.ir_sensob.get_value())>0.9:
