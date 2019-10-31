@@ -120,13 +120,13 @@ class Behavior1(Behavior):
             # print("(behavior1) sensorlist:", self.ir_sensob.get_value(), "product_values:", product_values)
             # average = 0
             
-            if self.ir_sensob.get_value()[0] > 0.9:
+            if self.ir_sensob.get_value()[0] > 0.5:
                 # White line on right side, turn left
                 self.motor_recommendations = ['l', 110, 0.4]
-            elif self.ir_sensob.get_value()[2] > 0.9:
+            elif self.ir_sensob.get_value()[2] > 0.5:
                 # White line in the middle, turn a lot
                 self.motor_recommendations = ['l', 150, 0.4]
-            elif self.ir_sensob.get_value()[5] > 0.9:
+            elif self.ir_sensob.get_value()[5] > 0.5:
                 # White line on left side, turn right:
                 self.motor_recommendations = ['r', 110, 0.4]
             
