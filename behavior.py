@@ -129,6 +129,7 @@ class Behavior1(Behavior):
             elif self.ir_sensob.get_value()[5] > 0.5:
                 # White line on left side, turn right:
                 self.motor_recommendations = ['r', 110, 0.4]
+            return
             
             """if sum(self.ir_sensob.get_value())>0.9:
                 average = 3
