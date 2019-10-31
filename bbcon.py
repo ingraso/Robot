@@ -5,17 +5,6 @@ import behavior
 import motob
 import sensob
 import zumo_button
-#import sys
-#sys.path.append('../')
-#import project6_supply.zumo_button
-from time import sleep
-import random
-import imager2 as IMR
-from reflectance_sensors import ReflectanceSensors
-from camera import Camera
-from motors import Motors
-from ultrasonic import Ultrasonic
-from zumo_button import ZumoButton
 
 
 class Bbcon:
@@ -57,7 +46,7 @@ class Bbcon:
                 sens.update()
                 # print(str(sens), " ble oppdatert")
             # else:
-                # print("*************", str(sens), "ble ikke oppdatert")
+            # print("*************", str(sens), "ble ikke oppdatert")
             # print("Sensob :" + str(sens) + "har blitt oppdatert")
 
         for behav in self.behavior_objects:
@@ -90,34 +79,28 @@ class Bbcon:
             # print("sensob :" + str(sens) + "resettes")
 
 
-
-
 def main():
-		print("*****Hello there, it's I, THE BBCON!!!*****")
-		BBCON = Bbcon(motob.motob())  # skrive inn motobs
-		BBCON.add_sensor(sensob.LineDetector())  # legg til alle senobs
-		BBCON.add_sensor(sensob.MeasureDistance())  # legg til alle senobs
-		BBCON.add_sensor(sensob.Cameraob())  # legg til alle senobs
-		
-		# lager variabel for behavior 2
-		b2 = behavior.Behavior2(BBCON.sensobs_objects[1], BBCON)
-		
-		BBCON.add_behavior(behavior.Behavior1(BBCON.sensobs_objects[0], BBCON))  # legg til alle behaviours
-		#BBCON.add_behavior(behavior.Behavior2(BBCON.sensobs_objects[1], BBCON))
-		BBCON.add_behavior(b2)
-		#BBCON.add_behavior(behavior.Behavior3(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON.sensobs_objects[0], BBCON))
-		#BBCON.add_behavior(behavior.Behavior4(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
-		BBCON.add_behavior(behavior.Behavior5(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
-		BBCON.add_behavior(behavior.Behavior6(BBCON))
-		BBCON.arbitrator.set_default_current_behavior(b2)
-		TOTAL_STEPS = 0
-		BUTTON_BUTTON = True
-		zumo_button.ZumoButton().wait_for_press()
-		while BUTTON_BUTTON:
-			TOTAL_STEPS += 1
-			print('\n\nthis is a step number: ' + str(TOTAL_STEPS))
-			BBCON.run_one_timestep()			
-		
+    print("*****Hello there, it's I, THE BBCON!!!*****")
+    BBCON = Bbcon(motob.motob())  # skrive inn motobs
+    BBCON.add_sensor(sensob.LineDetector())  # legg til alle senobs
+    BBCON.add_sensor(sensob.MeasureDistance())  # legg til alle senobs
+    BBCON.add_sensor(sensob.Cameraob())  # legg til alle senobs
+
+    # lager variabel for behavior 2
+    b2 = behavior.Behavior2(BBCON.sensobs_objects[1], BBCON)
+
+    BBCON.add_behavior(behavior.Behavior1(BBCON.sensobs_objects[0], BBCON))
+    BBCON.add_behavior(b2)
+    BBCON.add_behavior(behavior.Behavior5(BBCON.sensobs_objects[1], BBCON.sensobs_objects[2], BBCON))
+    BBCON.add_behavior(behavior.Behavior6(BBCON))
+    BBCON.arbitrator.set_default_current_behavior(b2)
+    TOTAL_STEPS = 0
+    BUTTON_BUTTON = True
+    zumo_button.ZumoButton().wait_for_press()
+    while BUTTON_BUTTON:
+        TOTAL_STEPS += 1
+        print('\n\nthis is a step number: ' + str(TOTAL_STEPS))
+        BBCON.run_one_timestep()
 
 
 if __name__ == "__main__":
