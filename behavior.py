@@ -219,17 +219,15 @@ class Behavior2(Behavior):
             else:
                 # If we are closer than 10 cm we should use the camera
                 self.match_degree = """
-
+"""
 
 class Behavior3(Behavior):
-    """This behavior will check if the object is pushed outside of the tape"""
     
     def __repr__(self):
         return "Behavior3"
 
     def __init__(self, measure_distance, camera_ob, line_detector, bbcon):
-        """This object should keep track of the line, distance to object,
-        and the color of the object"""
+        
         self.sensobs = [measure_distance, camera_ob, line_detector]
         self.bbcon = bbcon
         super().__init__(bbcon, self.sensobs)
@@ -237,7 +235,7 @@ class Behavior3(Behavior):
         self.priority = 1
 
     def consider_activation(self):
-        """We should activate the behavior if the object is pushed out of line"""
+       
         # and self.sensobs[1].get_value() >= 0.5 \
         if self.sensobs[0].get_value() < 5 and (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) <= 0.4):
             print("Gjennomsnitt ala Karro:", sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()))
@@ -246,7 +244,7 @@ class Behavior3(Behavior):
         return False
 
     def consider_deactivation(self):
-        """Should usually be deactivated"""
+        
          # and self.sensobs[1].get_value() >= 0.5 \
         if self.sensobs[0].get_value() >= 5 or (sum(self.sensobs[2].get_value()) / len(self.sensobs[2].get_value()) > 0.4):
             # Switched for and to or
@@ -265,6 +263,8 @@ class Behavior3(Behavior):
             self.match_degree = 0
             self.motor_recommendations = ['l', 60, 0.2]
 """
+            
+            """
 class Behavior4(Behavior):
 
     def __init__(self, measure_distance, camera_ob, bbcon):
