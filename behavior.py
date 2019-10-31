@@ -111,7 +111,7 @@ class Behavior1(Behavior):
 
             # find which side of the robot the line is detected
 
-            degrees = 180
+            degrees = 100
             product_values = []
 
             for value_index in range(len(self.ir_sensob.get_value())):
